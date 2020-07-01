@@ -37,7 +37,7 @@ lint:                                   ## Run lint checks
 
 lint-fix:                               ## Automatically fix style violations
 	black --line-length=120 jax_toolkit setup.py
-	isort --lines 120 --recursive --use-parentheses jax_toolkit setup.py
+	isort --lines 120 --multi-line=3 --recursive --trailing-comma --use-parentheses jax_toolkit setup.py
 
 pip-compile:                            ## Compile requirements.txt from setup.py
 	pip-compile
