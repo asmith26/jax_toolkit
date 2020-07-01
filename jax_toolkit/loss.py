@@ -19,8 +19,8 @@ def mean_squared_error(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
 # UTILS
 # =====
 SUPPORTED_LOSSES: Dict[str, Callable[[jnp.ndarray, jnp.ndarray], jnp.ndarray]] = {
-    "mean_squared_error": mean_squared_error,
     "categorical_crossentropy": categorical_crossentropy,
+    "mean_squared_error": mean_squared_error,
 }
 
 
