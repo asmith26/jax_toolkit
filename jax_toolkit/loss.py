@@ -5,16 +5,22 @@ import jax
 import jax.numpy as jnp
 
 
+@jax.jit
+def categorical_crossentropy(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
+    return jnp.sum(y_true * -jnp.log(y_pred))
+
+
+@jax.jit
 def mean_squared_error(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
-    loss = jnp.average((y_true - y_pred) ** 2)  # weights=sample_weight)
-    return loss
+    return jnp.average((y_true - y_pred) ** 2)  # weights=sample_weight)
 
 
 # =====
 # UTILS
 # =====
 SUPPORTED_LOSSES: Dict[str, Callable[[jnp.ndarray, jnp.ndarray], jnp.ndarray]] = {
-    "mean_squared_error": mean_squared_error
+    "mean_squared_error": mean_squared_error,
+    "categorical_crossentropy": categorical_crossentropy,
 }
 
 
