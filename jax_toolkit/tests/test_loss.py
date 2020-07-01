@@ -3,8 +3,8 @@ from unittest.mock import MagicMock
 
 import jax.numpy as jnp
 
-from jax_toolkit.loss import LossNotCurrentlySupportedException, get_loss_function, mean_squared_error, \
-    categorical_crossentropy
+from jax_toolkit.loss import (LossNotCurrentlySupportedException, categorical_crossentropy, get_loss_function,
+                              mean_squared_error)
 
 
 class TestCategoricalCrossentropy(unittest.TestCase):
