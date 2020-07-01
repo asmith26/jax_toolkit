@@ -36,8 +36,8 @@ lint:                                   ## Run lint checks
 	tox -e lint
 
 lint-fix:                               ## Automatically fix style violations
-	black --line-length=120 pandas_toolkit setup.py
-	isort --lines 120 --recursive --use-parentheses pandas_toolkit setup.py
+	black --line-length=120 jax_toolkit setup.py
+	isort --lines 120 --recursive --use-parentheses jax_toolkit setup.py
 
 pip-compile:                            ## Compile requirements.txt from setup.py
 	pip-compile

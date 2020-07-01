@@ -1,7 +1,7 @@
 # Accessors API
 
 ## df.ml. Methods
-### `standard_scaler` *<small>[[source](https://github.com/asmith26/pandas_toolkit/blob/master/pandas_toolkit/ml/__init__.py#L13)]</small>*
+### `standard_scaler` *<small>[[source](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/ml/__init__.py#L13)]</small>*
 `standard_scaler`*(<span style='color:green'>column</span>: <span style='color:blue'>str</span>) -> pd.Series*
 
 **Parameters**
@@ -20,7 +20,7 @@ Examples
 pd.Series([-1, 1])
 ```
 
-### `train_validation_split` *<small>[[source](https://github.com/asmith26/pandas_toolkit/blob/master/pandas_toolkit/ml/__init__.py#L37)]</small>*
+### `train_validation_split` *<small>[[source](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/ml/__init__.py#L37)]</small>*
 `train_validation_split`*(<span style='color:green'>train_frac</span>: <span style='color:blue'>float</span>, <span style='color:green'>random_seed</span>: <span style='color:blue'>int = None</span>) -> Tuple[pd.DataFrame, pd.DataFrame]*
 
 **Parameters**
@@ -44,7 +44,7 @@ pd.DataFrame({"x": [2], "y": [2]}, index=[2])
 ```
 
 ## df.nn. Methods
-### `init` *<small>[[source](https://github.com/asmith26/pandas_toolkit/blob/master/pandas_toolkit/nn/__init__.py#L38)]</small>*
+### `init` *<small>[[source](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/nn/__init__.py#L38)]</small>*
 `init`*(<span style='color:green'>x_columns</span>: <span style='color:blue'>List[str]</span>, <span style='color:green'>y_columns</span>: <span style='color:blue'>List[str]</span>, <span style='color:green'>net_function</span>: <span style='color:blue'>Callable[[jnp.ndarray] jnp.ndarray]</span>, <span style='color:green'>loss</span>: <span style='color:blue'>str</span>, <span style='color:green'>optimizer</span>: <span style='color:blue'>InitUpdate = optix.adam(learning_rate=1e-3)</span>, <span style='color:green'>batch_size</span>: <span style='color:blue'>int = None</span>) -> pd.DataFrame*
 
 **Parameters**
@@ -63,7 +63,7 @@ jnp.ndarray*.
 > **batch_size:** Batch size to use. If not specified, the number of rows in the entire dataframe is used.
 
 **Returns**
-> A pd.DataFrame containing a neural network model ready for training with pandas_toolkit.
+> A pd.DataFrame containing a neural network model ready for training with jax_toolkit.
 
 Examples
 ```python
@@ -79,11 +79,11 @@ Examples
 ...     df_train = df_train.nn.update(df_validation=df_validation)
 ```
 
-### `get_model` *<small>[[source](https://github.com/asmith26/pandas_toolkit/blob/master/pandas_toolkit/nn/__init__.py#L93)]</small>*
+### `get_model` *<small>[[source](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/nn/__init__.py#L93)]</small>*
 `get_model`*() -> Model*
 
  **Returns**
- > A pandas_toolkit.nn.Model object. As this is not linked to a pd.DataFrame, it is much more lightweight
+ > A jax_toolkit.nn.Model object. As this is not linked to a pd.DataFrame, it is much more lightweight
  and could be used in e.g. a production setting.
 
 Examples
@@ -92,20 +92,20 @@ Examples
 >>> model.predict(x=jnp.ndarray([42]))
 ```
 
-### `hvplot_losses` *<small>[[source](https://github.com/asmith26/pandas_toolkit/blob/master/pandas_toolkit/nn/__init__.py#L107)]</small>*
+### `hvplot_losses` *<small>[[source](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/nn/__init__.py#L107)]</small>*
 `hvplot_losses`*() -> None*
 
 **Returns**
 > A Holoviews object for interactive (Bokeh backend), real-time ploting of training and validation loss
 curves. For an example usage, see [this notebook](
-https://github.com/asmith26/pandas_toolkit/blob/master/notebooks/sine.ipynb)
+https://github.com/asmith26/jax_toolkit/blob/master/notebooks/sine.ipynb)
 
 Examples
 ```python
 >>> df_train.nn.hvplot_losses()
 ```
 
-### `update` *<small>[[source](https://github.com/asmith26/pandas_toolkit/blob/master/pandas_toolkit/nn/__init__.py#L136)]</small>*
+### `update` *<small>[[source](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/nn/__init__.py#L136)]</small>*
 `update`*(<span style='color:green'>df_validation_to_plot</span>: <span style='color:blue'>pd.DataFrame = None</span>) -> pd.DataFrame*
 
 **Parameters**
@@ -120,7 +120,7 @@ Examples
 ...     df_train = df_train.nn.update(df_validation_to_plot=df_validation)
 ```
 
-### `predict` *<small>[[source](https://github.com/asmith26/pandas_toolkit/blob/master/pandas_toolkit/nn/__init__.py#L169)]</small>*
+### `predict` *<small>[[source](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/nn/__init__.py#L169)]</small>*
 `predict`*(<span style='color:green'>x_columns</span>: <span style='color:blue'>List[str] = None</span>) -> pd.Series*
 
 **Parameters**
@@ -136,7 +136,7 @@ Examples
 >>> df_new["predictions"] = df_new.nn.predict()
 ```
 
-### `evaluate` *<small>[[source](https://github.com/asmith26/pandas_toolkit/blob/master/pandas_toolkit/nn/__init__.py#L193)]</small>*
+### `evaluate` *<small>[[source](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/nn/__init__.py#L193)]</small>*
 `evaluate`*(<span style='color:green'>x_columns</span>: <span style='color:blue'>List[str] = None</span>, <span style='color:green'>y_columns</span>: <span style='color:blue'>List[str] = None</span>) -> pd.Series*
 
 **Parameters**

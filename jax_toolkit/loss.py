@@ -10,16 +10,12 @@ def mean_squared_error(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
     return loss
 
 
+# =====
+# UTILS
+# =====
 SUPPORTED_LOSSES: Dict[str, Callable[[jnp.ndarray, jnp.ndarray], jnp.ndarray]] = {
     "mean_squared_error": mean_squared_error
 }
-
-
-class LossNotCurrentlySupportedException(Exception):
-    def __init__(self, loss: str):
-        super().__init__(
-            f"Loss={loss} is not currently supported. Currently supported losses are: {list(SUPPORTED_LOSSES.keys())}"
-        )
 
 
 def get_loss_function(
@@ -37,3 +33,10 @@ def get_loss_function(
         return loss_function_wrapper  # type: ignore
     except KeyError:
         raise LossNotCurrentlySupportedException(loss)
+
+
+class LossNotCurrentlySupportedException(Exception):
+    def __init__(self, loss: str):
+        super().__init__(
+            f"Loss={loss} is not currently supported. Currently supported losses are: {list(SUPPORTED_LOSSES.keys())}"
+        )

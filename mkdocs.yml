@@ -1,5 +1,5 @@
-site_name: pandas_toolkit
-repo_url: https://github.com/asmith26/pandas_toolkit
+site_name: jax_toolkit
+repo_url: https://github.com/asmith26/jax_toolkit
 nav:
     - Overview: index.md
     - API:

@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 
 import jax.numpy as jnp
 
-from pandas_toolkit.nn.loss import LossNotCurrentlySupportedException, get_loss_function, mean_squared_error
+from jax_toolkit.loss import LossNotCurrentlySupportedException, get_loss_function, mean_squared_error
 
 
 class TestGetLossFunction(unittest.TestCase):
