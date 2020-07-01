@@ -1,0 +1,14 @@
+site_name: pandas_toolkit
+repo_url: https://github.com/asmith26/pandas_toolkit
+nav:
+    - Overview: index.md
+    - API:
+        - Accessors: api/accessors.md
+theme:
+#    name: readthedocs
+    name: material
+
+markdown_extensions:
+    - toc:
+        permalink: True
+    - pymdownx.superfences  # python code colouring

@@ -1,0 +1,9 @@
+.coverage
+.idea
+*.egg-info
+.tox
+.mypy_cache
+site
+__pycache__
+htmlcov
+.ipynb_checkpoints
