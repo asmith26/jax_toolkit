@@ -12,7 +12,7 @@ We have attempted to currently include only functions here that are quite robust
 #### Losses
 | Name | Notes |
 |---|---|
-| [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/loss.py#L9) (aka. binary/multiclass log loss or binary/categorical crossentropy) | |
+| [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/loss.py#L9) (aka. binary/multi-class log loss or binary/categorical crossentropy) | |
 | [hinge] | |
 | [squared_hinge] | |
 | [kullback_leibler_divergence] | |
@@ -38,4 +38,4 @@ We have attempted to currently include only functions here that are quite robust
 #### Metrics
 | Name | Notes |
 |---|---|
-| [r_squared] | |
+| [r2_score] | |

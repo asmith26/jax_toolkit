@@ -19,7 +19,7 @@ def log_loss(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
 
     # Clipping
     eps = 1e-15
-    y_pred = jnp.clip(y_pred.astype(jnp.float32), eps, 1 - eps)
+    y_pred = y_pred.astype(jnp.float32).clip(eps, 1 - eps)
 
     # Renormalize
     y_pred /= y_pred.sum(axis=1)[:, jnp.newaxis]
@@ -29,16 +29,61 @@ def log_loss(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
 
 
 @jax.jit
+def mean_absolute_error(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
+    loss = jnp.average(jnp.abs(y_pred - y_true), axis=0)
+    mean_loss_per_sample = jnp.average(loss)
+    return mean_loss_per_sample
+
+
+@jax.jit
+def median_absolute_error(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
+    loss = jnp.median(jnp.abs(y_pred - y_true), axis=0)
+    mean_loss_per_sample = jnp.average(loss)
+    return mean_loss_per_sample
+
+
+@jax.jit
+def max_absolute_error(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
+    loss = jnp.abs(y_pred - y_true).max(axis=0)
+    mean_loss_per_sample = jnp.average(loss)
+    return mean_loss_per_sample
+
+
+@jax.jit
 def mean_squared_error(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
-    return jnp.average((y_true - y_pred) ** 2)  # weights=sample_weight)
+    return jnp.average((y_true - y_pred) ** 2)
+
+
+@jax.jit
+def r2_score(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
+    """ Based on scikit-learn: https://github.com/scikit-learn/scikit-learn/blob
+        /ffbb1b4a0bbb58fdca34a30856c6f7faace87c67/sklearn/metrics/_regression.py#L513 """
+    numerator = ((y_true - y_pred) ** 2).sum(axis=0)
+    denominator = ((y_true - jnp.average(y_true, axis=0)) ** 2).sum(axis=0)
+    # if denominator.sum() == 0:
+    #     # if numerator.sum() == 0:  # i.e. all numerator is 0, so perfect fit
+    #     return jnp.array(1)
+        # else:
+        #     return jnp.array(0)  # i.e. constant y
+    r2_scores = 1 - (numerator / denominator)[jnp.nonzero(denominator)]
+    # handle nan resulting from division by 0
+    if y_true.ndim == 1:  # i.e. multi-output
+        return r2_scores
+    else:
+        return jnp.average(r2_scores[~jnp.isnan(r2_scores)])
 
 
 # =====
 # UTILS
 # =====
 SUPPORTED_LOSSES: Dict[str, Callable[[jnp.ndarray, jnp.ndarray], jnp.ndarray]] = {
-    "mean_squared_error": mean_squared_error,
     "log_loss": log_loss,
+    "mean_absolute_error": mean_absolute_error,
+    "median_absolute_error": median_absolute_error,
+    "max_absolute_error": max_absolute_error,
+    "mean_squared_error": mean_squared_error,
+    "r2_score": r2_score,
+
 }
 
 
