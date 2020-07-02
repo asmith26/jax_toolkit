@@ -25,10 +25,7 @@ coverage:                               ## Create python test coverage report an
 doc-deploy: doc-generate-api            ## Deploy doc to github pages
 	mkdocs gh-deploy
 
-doc-generate-api:                       ## Generate API doc
-	python docs/api_md_generate.py
-
-doc-serve-locally: doc-generate-api     ## Serve docs locally
+doc-serve-locally:				        ## Serve docs locally
 	firefox http://127.0.0.1:8000/
 	mkdocs serve
 

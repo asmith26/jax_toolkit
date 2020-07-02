@@ -1,9 +1,7 @@
 site_name: jax_toolkit
 repo_url: https://github.com/asmith26/jax_toolkit
 nav:
-    - Overview: index.md
-    - API:
-        - Accessors: api/accessors.md
+    - Losses and Metrics: losses_and_metrics.md
 theme:
 #    name: readthedocs
     name: material
