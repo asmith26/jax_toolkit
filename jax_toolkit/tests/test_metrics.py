@@ -17,8 +17,9 @@ class TestR2Score(unittest.TestCase):
         # multi-output
         actual_score = r2_score(jnp.array([[0, 1, 2], [0, 1, 2]]), jnp.array([[0, 1, 2], [0, 1, 2]]))
         self.assertEqual(1, actual_score)
-        actual_loss = r2_score(jnp.array([[1, 2, 3, 4], [4, 3, 2, 1], [1, 1, 0, 0]]),
-                               jnp.array([[1, 2, 0, 1], [4, 3, 1, 1], [0, 0, 0, 1]]))
+        actual_loss = r2_score(
+            jnp.array([[1, 2, 3, 4], [4, 3, 2, 1], [1, 1, 0, 0]]), jnp.array([[1, 2, 0, 1], [4, 3, 1, 1], [0, 0, 0, 1]])
+        )
         self.assertEqual(0.009157509, actual_loss)
         # constant y_true
         actual_loss = r2_score(jnp.array([[0, 0, 0], [0, 0, 0]]), jnp.array([[0, 1, 2], [0, 1, 2]]))

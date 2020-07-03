@@ -1,6 +1,5 @@
-import jax
 import jax.numpy as jnp
-from jax.ops import index_update, index
+from jax.ops import index, index_update
 
 
 # @jax.jit
