@@ -101,7 +101,7 @@ class TestMeanSquaredError(unittest.TestCase):
         actual_loss = mean_squared_error(jnp.array([0, 1, 2]), jnp.array([0, 1, 2]))
         self.assertEqual(0, actual_loss)
         actual_loss = mean_squared_error(jnp.array([0, 1, 2]), jnp.array([0, 0, 0]))
-        # self.assertEqual(1.6666667, actual_loss)
+        self.assertEqual(1.6666667, actual_loss)
         # multi-output
         actual_loss = mean_squared_error(jnp.array([[0, 1, 2], [0, 1, 2]]), jnp.array([[0, 1, 2], [0, 1, 2]]))
         self.assertEqual(0, actual_loss)

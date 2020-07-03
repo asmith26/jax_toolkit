@@ -1,6 +1,6 @@
 # Losses and Metrics
 
-Loss functions are normally minimised (e.g. for learning/optimising a model), and metrics are normally maximised (e.g for further evaluating the performance of a model). All loss and metric functions have the form:
+Loss functions are normally minimised (e.g. for learning/optimising a model), and metrics are normally maximised (e.g for further evaluating the performance of a model). All loss and metric functions have been designed to work in a similar way to [scikit-learn metrics](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics) (e.g. same names, similar implementations), and have the form:
 
 ```python
 function_name(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray
@@ -8,7 +8,7 @@ function_name(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray
 
 and can be imported with `from jax_toolkit.losses import LOSS_FUNCTION` or `from jax_toolkit.metrics import METRIC_FUNCTION`. 
 
-We have attempted to currently include only functions here that are quite robust for a wide range of problems (e.g. not too affected by unbalanced classes). Of course the choice of loss/metric function(s) are often quite dependent to a specific problem.
+Functions that have currently been included here are quite robust for a wide range of problems (e.g. not too affected by unbalanced classes). Of course the choice of loss/metric function(s) are often quite dependent to a specific problem.
 
 ## Classification
 #### Losses
