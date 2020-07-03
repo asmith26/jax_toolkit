@@ -6,6 +6,8 @@ Loss functions are normally minimised (e.g. for learning/optimising a model), an
 function_name(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray
 ```
 
+and can be imported with `from jax_toolkit.losses import LOSS_FUNCTION` or `from jax_toolkit.metrics import METRIC_FUNCTION`. 
+
 We have attempted to currently include only functions here that are quite robust for a wide range of problems (e.g. not too affected by unbalanced classes). Of course the choice of loss/metric function(s) are often quite dependent to a specific problem.
 
 ## Classification
