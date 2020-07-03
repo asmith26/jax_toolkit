@@ -3,8 +3,15 @@ from unittest.mock import MagicMock
 
 import jax.numpy as jnp
 
-from jax_toolkit.losses import LossNotCurrentlySupportedException, get_loss_function, log_loss, mean_squared_error, \
-    max_absolute_error, median_absolute_error, mean_absolute_error
+from jax_toolkit.losses import (
+    LossNotCurrentlySupportedException,
+    get_loss_function,
+    log_loss,
+    max_absolute_error,
+    mean_absolute_error,
+    mean_squared_error,
+    median_absolute_error,
+)
 
 
 class TestLogLoss(unittest.TestCase):
@@ -45,8 +52,9 @@ class TestMeanAbsoluteError(unittest.TestCase):
         # multi-output
         actual_loss = mean_absolute_error(jnp.array([[0, 1, 2], [0, 1, 2]]), jnp.array([[0, 1, 2], [0, 1, 2]]))
         self.assertEqual(0, actual_loss)
-        actual_loss = mean_absolute_error(jnp.array([[1, 2, 3, 4], [4, 3, 2, 1], [1, 1, 0, 0]]),
-                                            jnp.array([[1, 2, 0, 1], [4, 3, 1, 1], [0, 0, 0, 1]]))
+        actual_loss = mean_absolute_error(
+            jnp.array([[1, 2, 3, 4], [4, 3, 2, 1], [1, 1, 0, 0]]), jnp.array([[1, 2, 0, 1], [4, 3, 1, 1], [0, 0, 0, 1]])
+        )
         self.assertEqual(0.8333334, actual_loss)
         # Based on scikit-learn: https://github.com/scikit-learn/scikit-learn/blob
         # /ffbb1b4a0bbb58fdca34a30856c6f7faace87c67/sklearn/metrics/tests/test_regression.py#L25
@@ -65,8 +73,9 @@ class TestMedianAbsoluteError(unittest.TestCase):
         # multi-output
         actual_loss = median_absolute_error(jnp.array([[0, 1, 2], [0, 1, 2]]), jnp.array([[0, 1, 2], [0, 1, 2]]))
         self.assertEqual(0, actual_loss)
-        actual_loss = median_absolute_error(jnp.array([[1, 2, 3, 4], [4, 3, 2, 1], [1, 1, 0, 0]]),
-                                            jnp.array([[1, 2, 0, 1], [4, 3, 1, 1], [0, 0, 0, 1]]))
+        actual_loss = median_absolute_error(
+            jnp.array([[1, 2, 3, 4], [4, 3, 2, 1], [1, 1, 0, 0]]), jnp.array([[1, 2, 0, 1], [4, 3, 1, 1], [0, 0, 0, 1]])
+        )
         self.assertEqual(0.5, actual_loss)
         # Based on scikit-learn: https://github.com/scikit-learn/scikit-learn/blob
         # /ffbb1b4a0bbb58fdca34a30856c6f7faace87c67/sklearn/metrics/tests/test_regression.py#L25
@@ -85,8 +94,9 @@ class TestMaxAbsoluteError(unittest.TestCase):
         # multi-output
         actual_loss = max_absolute_error(jnp.array([[0, 1, 2], [0, 1, 2]]), jnp.array([[0, 1, 2], [0, 1, 2]]))
         self.assertEqual(0, actual_loss)
-        actual_loss = max_absolute_error(jnp.array([[1, 2, 3, 4], [4, 3, 2, 1], [1, 1, 0, 0]]),
-                                         jnp.array([[1, 2, 0, 1], [4, 3, 1, 1], [0, 0, 0, 1]]))
+        actual_loss = max_absolute_error(
+            jnp.array([[1, 2, 3, 4], [4, 3, 2, 1], [1, 1, 0, 0]]), jnp.array([[1, 2, 0, 1], [4, 3, 1, 1], [0, 0, 0, 1]])
+        )
         self.assertEqual(2, actual_loss)
         # Based on scikit-learn: https://github.com/scikit-learn/scikit-learn/blob
         # /ffbb1b4a0bbb58fdca34a30856c6f7faace87c67/sklearn/metrics/tests/test_regression.py#L25
@@ -105,8 +115,9 @@ class TestMeanSquaredError(unittest.TestCase):
         # multi-output
         actual_loss = mean_squared_error(jnp.array([[0, 1, 2], [0, 1, 2]]), jnp.array([[0, 1, 2], [0, 1, 2]]))
         self.assertEqual(0, actual_loss)
-        actual_loss = mean_squared_error(jnp.array([[1, 2, 3, 4], [4, 3, 2, 1], [1, 1, 0, 0]]),
-                                         jnp.array([[1, 2, 0, 1], [4, 3, 1, 1], [0, 0, 0, 1]]))
+        actual_loss = mean_squared_error(
+            jnp.array([[1, 2, 3, 4], [4, 3, 2, 1], [1, 1, 0, 0]]), jnp.array([[1, 2, 0, 1], [4, 3, 1, 1], [0, 0, 0, 1]])
+        )
         self.assertEqual(1.8333334, actual_loss)
         # Based on scikit-learn: https://github.com/scikit-learn/scikit-learn/blob
         # /ffbb1b4a0bbb58fdca34a30856c6f7faace87c67/sklearn/metrics/tests/test_regression.py#L25
