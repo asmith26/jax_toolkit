@@ -8,11 +8,12 @@ def r2_score(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
         /ffbb1b4a0bbb58fdca34a30856c6f7faace87c67/sklearn/metrics/_regression.py#L513 """
     numerator = ((y_true - y_pred) ** 2).sum(axis=0)
     denominator = ((y_true - jnp.average(y_true, axis=0)) ** 2).sum(axis=0)
-    if denominator.sum() == 0:
-        if numerator.sum() == 0:  # i.e. all numerator is 0, so perfect fit
-            return jnp.array(1)
+    if denominator.sum() == 0:  # i.e. constant y_true
+        if numerator.sum() == 0:
+            return jnp.array(1)  # i.e. all numerator is 0, so perfect fit
         else:
-            return jnp.array(0)  # i.e. constant y_true
+            return jnp.array(0)  # arbitrary set to zero (following scikit-learn) to avoid -inf scores, having a
+                                 # constant y_true is not interesting for scoring a regression anyway
     r2_scores = 1 - (numerator / denominator)
     if y_true.ndim == 1:
         return r2_scores
