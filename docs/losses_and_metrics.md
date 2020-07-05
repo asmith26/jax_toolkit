@@ -27,6 +27,7 @@ https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/giou_
 https://towardsdatascience.com/handling-class-imbalanced-data-using-a-loss-specifically-made-for-it-6e58fd65ffab
 
 ![log loss plot](img/log_loss.png)
+![squared hinge plot](img/squared_hinge.png)
 
 
 #### Metrics

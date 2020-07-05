@@ -30,3 +30,6 @@ class TestR2Score(unittest.TestCase):
         y_pred = y_true + 1
         actual_score = r2_score(y_true, y_pred)
         self.assertEqual(0.9951981, actual_score)
+        # raise error if number of y_true and y_pred inputs don't match.
+        with self.assertRaises(TypeError) as _:
+            r2_score(jnp.array([0, 0]), jnp.array([0, 0, 0]))
