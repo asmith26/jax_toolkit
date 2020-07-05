@@ -2,7 +2,7 @@ from typing import Callable, Dict
 
 import haiku as hk
 import jax
-import jax.numpy as jnp
+from jax import numpy as jnp
 
 
 @jax.jit
