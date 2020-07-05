@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
 
-import jax.numpy as jnp
+from jax import numpy as jnp
 
 from jax_toolkit.loss import LossNotCurrentlySupportedException, get_loss_function, log_loss, mean_squared_error
 
