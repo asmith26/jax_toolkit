@@ -1,6 +1,6 @@
 # Losses and Metrics
 
-Loss functions are normally minimised (e.g. for learning/optimising a model), and metrics are normally maximised (e.g for further evaluating the performance of a model). All loss and metric functions have been designed to work in a similar way to [scikit-learn metrics](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics) (e.g. same names, similar implementations), and have the form:
+Loss functions are normally minimised (e.g. for learning/optimising a model), and metrics are normally maximised (e.g for further evaluating the performance of a model). All loss and metric functions have been designed to work in a similar way to [scikit-learn metrics](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics) if available, otherwise [tensorflow](https://www.tensorflow.org/api_docs/python/tf)/[tensorflow addons](https://www.tensorflow.org/addons/api_docs/python/tfa/) (e.g. same names, similar implementations), and have the form:
 
 ```python
 function_name(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray
@@ -13,9 +13,7 @@ and can be imported with `from jax_toolkit.losses import LOSS_FUNCTION` or `from
 | Name | Notes |
 |---|---|
 | [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses.py#L9) (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident (i.e. with probability 1) wrong predictions (see images below). |
-| [squared_hinge] | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). |
-https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/keras/losses.py#L1324
-
+| [squared_hinge] | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects binary classifications in the set {-1, +1}. |
 | [kullback_leibler_divergence] | Measeure how the probability distitrbutions of y_true and y_pred differ. 0 := identical. |
 https://github.com/tensorflow/tensorflow/blob/v2.2.0/tensorflow/python/keras/losses.py#L1598-L1636
 
