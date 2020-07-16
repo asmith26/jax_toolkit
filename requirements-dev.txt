@@ -21,4 +21,4 @@ bandit==1.6.2
 # Test
 coverage==5.2
 nose2==0.9.2
-tox==3.17.0
+tox==3.17.1
