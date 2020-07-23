@@ -7,7 +7,7 @@
 absl-py==0.9.0            # via dm-haiku, jax, jaxlib
 dm-haiku==0.0.1           # via jax_toolkit (setup.py)
 jax==0.1.73               # via jax_toolkit (setup.py)
-jaxlib==0.1.51            # via jax_toolkit (setup.py)
+jaxlib==0.1.52            # via jax_toolkit (setup.py)
 numpy==1.19.1             # via dm-haiku, jax, jaxlib, opt-einsum, scipy
 opt-einsum==3.3.0         # via jax
 scipy==1.5.1              # via jaxlib
