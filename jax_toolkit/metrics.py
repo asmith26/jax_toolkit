@@ -12,8 +12,9 @@ def r2_score(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
         if numerator.sum() == 0:
             return jnp.array(1)  # i.e. all numerator is 0, so perfect fit
         else:
-            return jnp.array(0)  # arbitrary set to zero (following scikit-learn) to avoid -inf scores, having a
-                                 # constant y_true is not interesting for scoring a regression anyway
+            # arbitrary set to zero (following scikit-learn) to avoid -inf scores, having a
+            # constant y_true is not interesting for scoring a regression anyway
+            return jnp.array(0)
     r2_scores = 1 - (numerator / denominator)
     if y_true.ndim == 1:
         return r2_scores

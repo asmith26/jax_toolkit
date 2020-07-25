@@ -10,7 +10,8 @@ from jax_toolkit.losses import (
     max_absolute_error,
     mean_absolute_error,
     mean_squared_error,
-    median_absolute_error, squared_hinge,
+    median_absolute_error,
+    squared_hinge,
 )
 
 
@@ -55,14 +56,13 @@ class TestSquaredHinge(unittest.TestCase):
         self.assertEqual(0, actual_loss)
         # Based on scikit-learn: https://github.com/scikit-learn/scikit-learn/blob
         # /fd237278e895b42abe8d8d09105cbb82dc2cbba7/sklearn/metrics/tests/test_classification.py#L2037
-        actual_loss = squared_hinge(jnp.array([-1, 1, 1, -1]),
-                                    jnp.array([-8.5, 0.5, 1.5, -0.3]))
+        actual_loss = squared_hinge(jnp.array([-1, 1, 1, -1]), jnp.array([-8.5, 0.5, 1.5, -0.3]))
         self.assertEqual(0.185, actual_loss)
         # Based on tensorflow: https://github.com/tensorflow/tensorflow/blob/af7fd02ca40f362c4ac96dd064d6a2224b65d784
         # /tensorflow/python/keras/losses_test.py#L1114
-        actual_loss = squared_hinge(jnp.array([[-1, 1, -1, 1], [-1, -1, 1, 1]]),
-                                    jnp.array([[-0.3, 0.2, -0.1, 1.6],
-                                               [-0.25, -1., 0.5, 0.6]]))
+        actual_loss = squared_hinge(
+            jnp.array([[-1, 1, -1, 1], [-1, -1, 1, 1]]), jnp.array([[-0.3, 0.2, -0.1, 1.6], [-0.25, -1.0, 0.5, 0.6]])
+        )
         self.assertEqual(0.36406252, actual_loss)
         # raise error if number of y_true and y_pred inputs don't match.
         with self.assertRaises(TypeError) as _:

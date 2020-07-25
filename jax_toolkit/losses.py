@@ -34,6 +34,7 @@ def squared_hinge(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
         /tensorflow/python/keras/losses.py#L1324 """
     return jnp.average(jnp.clip(1 - y_true * y_pred, 0, None) ** 2)
 
+
 @jax.jit
 def mean_absolute_error(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
     loss = jnp.average(jnp.abs(y_pred - y_true), axis=0)
