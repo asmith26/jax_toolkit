@@ -30,7 +30,12 @@ doc-serve-locally:				        ## Serve docs locally
 	mkdocs serve
 
 lint:                                   ## Run lint checks
-	tox -e lint
+	bandit --recursive jax_toolkit setup.py
+	# PyCharm editor uses default 120 line length
+	black --check --diff --line-length=120 jax_toolkit setup.py
+	isort --check-only --lines 120 --multi-line=3 --recursive --trailing-comma --use-parentheses jax_toolkit setup.py
+	flake8 --max-line-length=120 --extend-ignore=F401,I001 jax_toolkit setup.py
+	mypy jax_toolkit --strict --ignore-missing-imports --implicit-optional --allow-untyped-decorators
 
 lint-fix:                               ## Automatically fix style violations
 	black --line-length=120 jax_toolkit setup.py
