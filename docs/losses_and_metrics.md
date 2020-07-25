@@ -13,7 +13,7 @@ and can be imported with `from jax_toolkit.losses import LOSS_FUNCTION` or `from
 | Name | Notes |
 |---|---|
 | [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses.py#L9) (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident (i.e. with probability 1) wrong predictions (see images below). |
-| [squared_hinge] | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects binary classifications in the set {-1, +1}. |
+| [squared_hinge]() | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects `y_true` to be binary classifications in the set {-1, +1}. |
 | [kullback_leibler_divergence] | Measure how the probability distributions of y_true and y_pred differ. 0 := identical. |
 https://github.com/tensorflow/tensorflow/blob/v2.2.0/tensorflow/python/keras/losses.py#L1598-L1636
 
