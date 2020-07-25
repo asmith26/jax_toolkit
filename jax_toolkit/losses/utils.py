@@ -1,11 +1,16 @@
-from typing import Dict, Callable
+from typing import Callable, Dict
 
 import haiku as hk
 import jax
 import jax.numpy as jnp
+
 from jax_toolkit.losses.classification import log_loss, squared_hinge
-from jax_toolkit.losses.regression import mean_absolute_error, median_absolute_error, max_absolute_error, \
-    mean_squared_error
+from jax_toolkit.losses.regression import (
+    max_absolute_error,
+    mean_absolute_error,
+    mean_squared_error,
+    median_absolute_error,
+)
 
 SUPPORTED_LOSSES: Dict[str, Callable[[jnp.ndarray, jnp.ndarray], jnp.ndarray]] = {
     "log_loss": log_loss,

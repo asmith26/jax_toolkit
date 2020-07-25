@@ -1,6 +1,7 @@
 import unittest
 
 import jax.numpy as jnp
+
 from jax_toolkit.losses.classification import log_loss, squared_hinge
 
 
@@ -79,4 +80,6 @@ class TestSquaredHinge(unittest.TestCase):
 
     def test_raises_when_number_of_multiclass_classes_not_equal(self):
         with self.assertRaises(TypeError) as _:
-            squared_hinge(jnp.array([[-1, -1, 1], [-1, -1, 1], [-1, -1, 1]]), jnp.array([[-0.2, 0.7], [0.6, -0.5], [0.4, 0.1]]))
+            squared_hinge(
+                jnp.array([[-1, -1, 1], [-1, -1, 1], [-1, -1, 1]]), jnp.array([[-0.2, 0.7], [0.6, -0.5], [0.4, 0.1]])
+            )

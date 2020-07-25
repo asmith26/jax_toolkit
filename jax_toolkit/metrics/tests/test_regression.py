@@ -1,6 +1,7 @@
 import unittest
 
 import jax.numpy as jnp
+
 from jax_toolkit.metrics.regression import r2_score
 
 
