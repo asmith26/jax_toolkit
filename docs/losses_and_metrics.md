@@ -6,14 +6,14 @@ Loss functions are normally minimised (e.g. for learning/optimising a model), an
 function_name(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray
 ```
 
-and can be imported with `from jax_toolkit.losses import LOSS_FUNCTION` or `from jax_toolkit.metrics import METRIC_FUNCTION`. 
+and can be imported with `from jax_toolkit.losses.[classification or regression] import LOSS_FUNCTION` or `from jax_toolkit.metrics.[classification or regression] import METRIC_FUNCTION`. 
 
 ## Classification
 #### Losses
 | Name | Notes |
 |---|---|
 | [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses.py#L9) (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident (i.e. with probability 1) wrong predictions (see images below). |
-| [squared_hinge]() | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects `y_true` to be binary classifications in the set {-1, +1}. |
+| [squared_hinge]() | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects `y_true` to be binary or multiclass classifications in the set {-1, +1}. |
 | [kullback_leibler_divergence] | Measure how the probability distributions of y_true and y_pred differ. 0 := identical. |
 https://github.com/tensorflow/tensorflow/blob/v2.2.0/tensorflow/python/keras/losses.py#L1598-L1636
 
@@ -48,10 +48,10 @@ https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrc
 #### Losses
 | Name | Notes |
 |---|---|
-| [mean_absolute_error](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses.py#L32) | Good interpretability, thus useful for displaying/explaining results. |
-| [median_absolute_error](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses.py#L39) | - Good interpretability, thus useful for displaying/explaining results.<br/>- Median can be more robust that the mean (e.g the mean number of legs a dog has is less than 4, whilst the median is 4). |
-| [max_absolute_error](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses.py#L46) | Good interpretability, thus useful for displaying/explaining results. |
-| [mean_squared_error](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses.py#L53) | Relatively simple and (mathemtically) convenient. |
+| [mean_absolute_error]() | Good interpretability, thus useful for displaying/explaining results. |
+| [median_absolute_error]() | - Good interpretability.<br/>- Median can be more robust that the mean (e.g the mean number of legs a dog has is less than 4, whilst the median is 4). |
+| [max_absolute_error]() | Good interpretability. |
+| [mean_squared_error]() | Relatively simple and (mathematically) convenient. |
 | [mean_squared_log_error] | For problems where y_true has a wide spread or large values, this does not punish a model as heavily as mean squared error. |
 https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_log_error.html#sklearn.metrics.mean_squared_log_error
 
