@@ -14,10 +14,10 @@ from jax_toolkit.losses.regression import (
 
 try:
     import haiku as hk
-except ModuleNotFoundError as e:
+except ModuleNotFoundError as e:  # pragma: no cover
     raise ImportError(
-        f"{e}\n\njax_toolkit utils requirements are not installed.\n\n"
-        "Install with:    pip install jax_toolkit[utils]"
+        f"{e}\n\njax_toolkit losses_utils requirements are not installed.\n\n"
+        "Install with:    pip install jax_toolkit[losses_utils]"
     )
 
 
