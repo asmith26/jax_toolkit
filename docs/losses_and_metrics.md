@@ -62,6 +62,6 @@ https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_l
 #### Losses
 | Name | Notes |
 |---|---|
-| [kullback_leibler_divergence]() | Measure how the probability distributions of y_true and y_pred differ (0 := identical). Often used in generative modelling, but can be used for multi-class classification. |
+| [kullback_leibler_divergence]() | Measure how the probability distributions of y_true and y_pred differ (0 := identical). Often used in generative modelling. |
 
 ![kuber leibler divergence plot](img/kuber_leibler_divergence.png)
