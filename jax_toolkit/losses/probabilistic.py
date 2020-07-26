@@ -3,7 +3,7 @@ import jax.numpy as jnp
 
 
 @jax.jit
-def kullback_leibler_divergence(y_true, y_pred):
+def kullback_leibler_divergence(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
     """ Based on tensorflow: https://github.com/tensorflow/tensorflow/blob/v2.2.0/tensorflow/python/keras/losses.py
         #L1598-L1636 """
     # If single dimension, assume binary classification problem
