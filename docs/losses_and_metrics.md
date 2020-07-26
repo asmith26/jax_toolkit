@@ -4,18 +4,20 @@ Loss functions are normally minimised (e.g. for learning/optimising a model), an
 
 ```python
 function_name(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray
-```
-
-and can be imported with `from jax_toolkit.losses.[classification or regression] import LOSS_FUNCTION` or `from jax_toolkit.metrics.[classification or regression] import METRIC_FUNCTION`. 
+``` 
 
 ## Classification
 #### Losses
+```python
+from jax_toolkit.losses.classification import LOSS_FUNCTION
+```
+
 | Name | Notes |
 |---|---|
-| [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses.py#L9) (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident (i.e. with probability 1) wrong predictions (see images below). |
+| [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses.py#L9) (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident (i.e. with probability 1) wrong predictions. |
 | [squared_hinge]() | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects `y_true` to be binary or multiclass classifications in the set {-1, +1}. |
-| [sigmoid_focal_crossentropy] | Shown to be useful for classification when you have highly imbalanced classes (e.g. for object detection where the imbalance between the background class and other classes is extremely high). |
-https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/focal_loss.py#L90
+| [sigmoid_focal_crossentropy]() | Shown to be useful for classification when you have highly imbalanced classes (e.g. for object detection where ["the imbalance between the background class and other classes is extremely high"](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/SigmoidFocalCrossEntropy)). |
+
 
 | [giou_loss] | Generalized Intersection over Union (GIoU) is designed to improve on intersection_over_union (see below). |
 https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/giou_loss.py
@@ -28,6 +30,10 @@ https://towardsdatascience.com/handling-class-imbalanced-data-using-a-loss-speci
 
 
 #### Metrics
+```python
+from jax_toolkit.metrics.classification import LOSS_FUNCTION
+```
+
 | Name | Notes |
 |---|---|
 | [balanced_accuracy] | Good interpretability, thus useful for displaying/explaining results.  |
@@ -43,6 +49,10 @@ https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrc
 
 ## Regression
 #### Losses
+```python
+from jax_toolkit.losses.regression import LOSS_FUNCTION
+```
+
 | Name | Notes |
 |---|---|
 | [mean_absolute_error]() | Good interpretability, thus useful for displaying/explaining results. |
@@ -53,12 +63,20 @@ https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrc
 https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_log_error.html#sklearn.metrics.mean_squared_log_error
 
 #### Metrics
+```python
+from jax_toolkit.metrics.regression import LOSS_FUNCTION
+```
+
 | Name | Notes |
 |---|---|
-| [r2_score](https://github.com/asmith26/jax_toolkit/blob/more_losses_and_metrics/jax_toolkit/metrics.py#L6) | Indication of goodness of fit. 1.0 := perfect fit, 0 := constant model that always predicts the mean of y. |
+| [r2_score](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/metrics/regression.py#L6) | Indication of goodness of fit.<br/>- `0` := constant model that always predicts the mean of y<br/>- `1` := perfect fit |
 
 
 ## Probabilistic
+```python
+from jax_toolkit.losses.probabilistic import LOSS_FUNCTION
+```
+
 #### Losses
 | Name | Notes |
 |---|---|
@@ -66,5 +84,30 @@ https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_l
 
 ![kuber leibler divergence plot](img/kuber_leibler_divergence.png)
 
+## Utils
+If you are familiar with [haiku](https://github.com/deepmind/dm-haiku), a JAX-based neural network library, you can use the [`get_haiku_loss_function()`](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/utils.py#L35) function to get a loss from jax_toolkit that can be used with haiku:
+
+```python
+import haiku as hk
+import jax
+import jax.numpy as jnp
+
+def net_function(x: jnp.ndarray) -> jnp.ndarray:
+    net = hk.Sequential([
+        ...
+    ])
+    predictions: jnp.ndarray = net(x)
+    return predictions
+net_transform = hk.transform(net_function)
+
+loss_function = get_haiku_loss_function(net_transform, loss="mean_squared_error")
+
+# Train model,
+...
+grads = grad(loss_function)(params, x, y)
+...
+``` 
+
+
 ## Useful resources
-[1] 24 Evaluation Metrics for Binary Classification (And When to Use Them), https://neptune.ai/blog/evaluation-metrics-binary-classification
+[1] [24 Evaluation Metrics for Binary Classification (And When to Use Them)](https://neptune.ai/blog/evaluation-metrics-binary-classification)
