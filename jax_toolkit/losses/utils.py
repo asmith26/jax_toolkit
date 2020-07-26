@@ -1,6 +1,12 @@
 from typing import Callable, Dict
 
-import haiku as hk
+try:
+    import haiku as hk
+except ModuleNotFoundError as e:
+    raise ImportError(
+        f"{e}\n\njax_toolkit utils requirements are not installed.\n\n"
+        "Install with:    pip install jax_toolkit[utils]"
+    )
 import jax
 import jax.numpy as jnp
 
