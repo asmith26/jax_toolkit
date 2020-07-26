@@ -65,3 +65,6 @@ https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_l
 | [kullback_leibler_divergence]() | Measure how the probability distributions of y_true and y_pred differ (0 := identical). Often used in generative modelling. |
 
 ![kuber leibler divergence plot](img/kuber_leibler_divergence.png)
+
+## Useful resources
+[1] 24 Evaluation Metrics for Binary Classification (And When to Use Them), https://neptune.ai/blog/evaluation-metrics-binary-classification
