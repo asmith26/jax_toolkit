@@ -14,9 +14,6 @@ and can be imported with `from jax_toolkit.losses.[classification or regression]
 |---|---|
 | [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses.py#L9) (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident (i.e. with probability 1) wrong predictions (see images below). |
 | [squared_hinge]() | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects `y_true` to be binary or multiclass classifications in the set {-1, +1}. |
-| [kullback_leibler_divergence] | Measure how the probability distributions of y_true and y_pred differ. 0 := identical. |
-https://github.com/tensorflow/tensorflow/blob/v2.2.0/tensorflow/python/keras/losses.py#L1598-L1636
-
 | [sigmoid_focal_crossentropy] | Shown to be useful for classification when you have highly imbalanced classes (e.g. for object detection where the imbalance between the background class and other classes is extremely high). |
 https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/focal_loss.py#L90
 
@@ -59,3 +56,15 @@ https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_l
 | Name | Notes |
 |---|---|
 | [r2_score](https://github.com/asmith26/jax_toolkit/blob/more_losses_and_metrics/jax_toolkit/metrics.py#L6) | Indication of goodness of fit. 1.0 := perfect fit, 0 := constant model that always predicts the mean of y. |
+
+
+## Probabilistic
+#### Losses
+| Name | Notes |
+|---|---|
+| [kullback_leibler_divergence]() | Measure how the probability distributions of y_true and y_pred differ (0 := identical). Often used in generative modelling. |
+
+![kuber leibler divergence plot](img/kuber_leibler_divergence.png)
+
+## Useful resources
+[1] 24 Evaluation Metrics for Binary Classification (And When to Use Them), https://neptune.ai/blog/evaluation-metrics-binary-classification
