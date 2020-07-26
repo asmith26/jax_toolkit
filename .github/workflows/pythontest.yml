@@ -30,6 +30,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install --no-cache-dir -r requirements-dev.txt
-    - name: Run tox
+    - name: Run lint
       run: |
-        tox
+        make lint
+    - name: Run tests
+      run: |
+        make coverage
