@@ -7,7 +7,7 @@ pymdown-extensions==7.1
 
 # Packaging
 bump2version==1.0.0
-pip-tools==5.2.1
+pip-tools==5.3.0
 
 # Lint
 black==19.10b0
