@@ -1,16 +1,10 @@
 from typing import Callable, Dict
 
-try:
-    import haiku as hk
-except ModuleNotFoundError as e:
-    raise ImportError(
-        f"{e}\n\njax_toolkit utils requirements are not installed.\n\n"
-        "Install with:    pip install jax_toolkit[utils]"
-    )
 import jax
 import jax.numpy as jnp
 
 from jax_toolkit.losses.classification import log_loss, squared_hinge
+from jax_toolkit.losses.probabilistic import kullback_leibler_divergence
 from jax_toolkit.losses.regression import (
     max_absolute_error,
     mean_absolute_error,
@@ -18,9 +12,19 @@ from jax_toolkit.losses.regression import (
     median_absolute_error,
 )
 
+try:
+    import haiku as hk
+except ModuleNotFoundError as e:
+    raise ImportError(
+        f"{e}\n\njax_toolkit utils requirements are not installed.\n\n"
+        "Install with:    pip install jax_toolkit[utils]"
+    )
+
+
 SUPPORTED_LOSSES: Dict[str, Callable[[jnp.ndarray, jnp.ndarray], jnp.ndarray]] = {
     "log_loss": log_loss,
     "squared_hinge": squared_hinge,
+    "kullback_leibler_divergence": kullback_leibler_divergence,
     "mean_absolute_error": mean_absolute_error,
     "median_absolute_error": median_absolute_error,
     "max_absolute_error": max_absolute_error,

@@ -21,7 +21,7 @@ setup(
     include_package_data=True,
     packages=find_packages(include=["jax_toolkit", "jax_toolkit.*"]),
     install_requires=["jax", "jaxlib"],
-    extras_require={"utils": ["dm-haiku"],},
+    extras_require={"utils": ["dm-haiku"]},
     python_requires=">=3.7",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
