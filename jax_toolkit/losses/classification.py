@@ -39,7 +39,9 @@ def squared_hinge(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
 
 
 # @jax.jit
-def sigmoid_focal_crossentropy(y_true: jnp.ndarray, y_pred: jnp.ndarray, alpha: float=0.25, gamma: float=2.0) -> jnp.ndarray:
+def sigmoid_focal_crossentropy(
+    y_true: jnp.ndarray, y_pred: jnp.ndarray, alpha: float = 0.25, gamma: float = 2.0
+) -> jnp.ndarray:
     """ Based on tensorflow_addons: https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/
         focal_loss.py#L90 """
     # If single dimension, assume binary classification problem
@@ -54,7 +56,7 @@ def sigmoid_focal_crossentropy(y_true: jnp.ndarray, y_pred: jnp.ndarray, alpha: 
     ce = _samplewise_log_loss(y_true, y_pred)
     if ce.ndim == 1:
         ce = ce[:, jnp.newaxis]
-        
+
     p_t = (y_true * y_pred) + ((1 - y_true) * (1 - y_pred))
     alpha_factor = jnp.array([1.0])
     modulating_factor = jnp.array([1.0])
