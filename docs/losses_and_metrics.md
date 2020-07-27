@@ -3,7 +3,7 @@
 Loss functions are normally minimised (e.g. for learning/optimising a model), and metrics are normally maximised (e.g for further evaluating the performance of a model). All loss and metric functions have been designed to work in a similar way to [scikit-learn metrics](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics) if available, otherwise [tensorflow](https://www.tensorflow.org/api_docs/python/tf)/[tensorflow addons](https://www.tensorflow.org/addons/api_docs/python/tfa/) (e.g. same names, similar implementations), and have the form:
 
 ```python
-function_name(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray
+function_name(y_true: jnp.ndarray, y_pred: jnp.ndarray, **kwargs) -> jnp.ndarray
 ``` 
 
 ## Classification
@@ -14,9 +14,9 @@ from jax_toolkit.losses.classification import LOSS_FUNCTION
 
 | Name | Notes |
 |---|---|
-| [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses.py#L9) (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident (i.e. with probability 1) wrong predictions. |
+| [log_loss]() (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident (i.e. with probability 1) wrong predictions. |
 | [squared_hinge]() | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects `y_true` to be binary or multiclass classifications in the set {-1, +1}. |
-| [sigmoid_focal_crossentropy]() | Shown to be useful for classification when you have highly imbalanced classes (e.g. for object detection where ["the imbalance between the background class and other classes is extremely high"](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/SigmoidFocalCrossEntropy)). |
+| [sigmoid_focal_crossentropy]() | Shown to be useful for classification when you have highly imbalanced classes (e.g. for ["object detection where the imbalance between the background class and other classes is extremely high"](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/SigmoidFocalCrossEntropy)). |
 
 
 | [giou_loss] | Generalized Intersection over Union (GIoU) is designed to improve on intersection_over_union (see below). |
@@ -25,8 +25,13 @@ https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/giou_
 
 https://towardsdatascience.com/handling-class-imbalanced-data-using-a-loss-specifically-made-for-it-6e58fd65ffab
 
-![log loss plot](img/log_loss.png)
-![squared hinge plot](img/squared_hinge.png)
+![comparing_loss_functions_when_y_true=0 plot](img/comparing_loss_functions_when_y_true=0.png)
+![comparing_loss_functions_when_y_true=1 plot](img/comparing_loss_functions_when_y_true=1.png)
+
+![log_loss plot](img/log_loss.png)
+![squared_hinge plot](img/squared_hinge.png)
+![sigmoid_foca lcrossentropy plt](img/sigmoid_focal_crossentropy.png)
+
 
 
 #### Metrics
@@ -81,8 +86,6 @@ from jax_toolkit.losses.probabilistic import LOSS_FUNCTION
 | Name | Notes |
 |---|---|
 | [kullback_leibler_divergence]() | Measure how the probability distributions of y_true and y_pred differ (0 := identical). Often used in generative modelling. |
-
-![kuber leibler divergence plot](img/kuber_leibler_divergence.png)
 
 ## Utils
 If you are familiar with [haiku](https://github.com/deepmind/dm-haiku), a JAX-based neural network library, you can use the [`get_haiku_loss_function()`](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/utils.py#L35) function to get a loss from jax_toolkit that can be used with haiku:
