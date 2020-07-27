@@ -109,7 +109,7 @@ class TestSigmoidFocalCrossentropy(unittest.TestCase):
     def test_multiclass_returns_correctly(self):
         actual_loss = sigmoid_focal_crossentropy(jnp.array([[0, 1], [1, 0]]), jnp.array([[0, 1], [1, 0]]))
         self.assertEqual(0, actual_loss)
-        # Based on binary case above (but now array):
+        # Based on binary case above (now arrays):
         actual_loss = sigmoid_focal_crossentropy(jnp.array([[1], [1], [1], [0], [0], [0]]), jnp.array([[0.97], [0.91], [0.73], [0.27], [0.09], [0.03]]), alpha=None, gamma=2.0)
         self.assertEqual(0.007911247, actual_loss)
 
