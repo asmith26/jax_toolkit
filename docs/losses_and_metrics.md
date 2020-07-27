@@ -3,7 +3,7 @@
 Loss functions are normally minimised (e.g. for learning/optimising a model), and metrics are normally maximised (e.g for further evaluating the performance of a model). All loss and metric functions have been designed to work in a similar way to [scikit-learn metrics](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics) if available, otherwise [tensorflow](https://www.tensorflow.org/api_docs/python/tf)/[tensorflow addons](https://www.tensorflow.org/addons/api_docs/python/tfa/) (e.g. same names, similar implementations), and have the form:
 
 ```python
-function_name(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray
+function_name(y_true: jnp.ndarray, y_pred: jnp.ndarray, **kwargs) -> jnp.ndarray
 ``` 
 
 ## Classification
@@ -14,9 +14,9 @@ from jax_toolkit.losses.classification import LOSS_FUNCTION
 
 | Name | Notes |
 |---|---|
-| [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses.py#L9) (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident (i.e. with probability 1) wrong predictions. |
+| [log_loss]() (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident (i.e. with probability 1) wrong predictions. |
 | [squared_hinge]() | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects `y_true` to be binary or multiclass classifications in the set {-1, +1}. |
-| [sigmoid_focal_crossentropy]() | Shown to be useful for classification when you have highly imbalanced classes (e.g. for object detection where ["the imbalance between the background class and other classes is extremely high"](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/SigmoidFocalCrossEntropy)). |
+| [sigmoid_focal_crossentropy]() | Shown to be useful for classification when you have highly imbalanced classes (e.g. for ["object detection where the imbalance between the background class and other classes is extremely high"](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/SigmoidFocalCrossEntropy)). |
 
 
 | [giou_loss] | Generalized Intersection over Union (GIoU) is designed to improve on intersection_over_union (see below). |
