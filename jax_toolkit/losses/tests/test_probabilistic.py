@@ -29,11 +29,11 @@ class TestKullbackLeiblerDivergence(unittest.TestCase):
     def test_raises_when_number_of_samples_not_equal_multiclass(self):
         with self.assertRaises(TypeError) as _:
             kullback_leibler_divergence(
-                jnp.array([[-1, 1], [1, -1]]), jnp.array([[-0.2, 0.7], [0.6, -0.5], [0.4, 0.1]])
+                jnp.array([[0, 1], [1, 0]]), jnp.array([[0.2, 0.7], [0.6, 0.5], [0.4, 0.1]])
             )
 
     def test_raises_when_number_of_multiclass_classes_not_equal(self):
         with self.assertRaises(TypeError) as _:
             kullback_leibler_divergence(
-                jnp.array([[-1, -1, 1], [-1, -1, 1], [-1, -1, 1]]), jnp.array([[-0.2, 0.7], [0.6, -0.5], [0.4, 0.1]])
+                jnp.array([[0, 0, 1], [0, 0, 1], [0, 0, 1]]), jnp.array([[0.2, 0.7], [0.6, 0.5], [0.4, 0.1]])
             )

@@ -25,8 +25,13 @@ https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/giou_
 
 https://towardsdatascience.com/handling-class-imbalanced-data-using-a-loss-specifically-made-for-it-6e58fd65ffab
 
-![log loss plot](img/log_loss.png)
-![squared hinge plot](img/squared_hinge.png)
+![comparing_loss_functions_when_y_true=0 plot](img/comparing_loss_functions_when_y_true=0.png)
+![comparing_loss_functions_when_y_true=1 plot](img/comparing_loss_functions_when_y_true=1.png)
+
+![log_loss plot](img/log_loss.png)
+![squared_hinge plot](img/squared_hinge.png)
+![sigmoid_foca lcrossentropy plt](img/sigmoid_focal_crossentropy.png)
+
 
 
 #### Metrics
@@ -81,8 +86,6 @@ from jax_toolkit.losses.probabilistic import LOSS_FUNCTION
 | Name | Notes |
 |---|---|
 | [kullback_leibler_divergence]() | Measure how the probability distributions of y_true and y_pred differ (0 := identical). Often used in generative modelling. |
-
-![kuber leibler divergence plot](img/kuber_leibler_divergence.png)
 
 ## Utils
 If you are familiar with [haiku](https://github.com/deepmind/dm-haiku), a JAX-based neural network library, you can use the [`get_haiku_loss_function()`](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/utils.py#L35) function to get a loss from jax_toolkit that can be used with haiku:
