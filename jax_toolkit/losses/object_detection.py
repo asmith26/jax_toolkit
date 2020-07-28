@@ -51,4 +51,3 @@ def giou_loss(boxes1: jnp.ndarray, boxes2: jnp.ndarray) -> jnp.ndarray:
     giou = _giou(boxes1, boxes2)
     mean_loss_all_samples = jnp.average(1 - giou)
     return mean_loss_all_samples
-
