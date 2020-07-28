@@ -2,7 +2,7 @@ import unittest
 
 import jax.numpy as jnp
 
-from jax_toolkit.losses.object_detection import giou_loss
+from jax_toolkit.losses.bounding_box import giou_loss
 
 
 class TestGiouLoss(unittest.TestCase):

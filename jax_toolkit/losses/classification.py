@@ -1,3 +1,5 @@
+from functools import partial
+
 import jax
 import jax.numpy as jnp
 
@@ -24,7 +26,7 @@ def _samplewise_log_loss(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarra
     return loss
 
 
-# @jax.jit
+@jax.jit
 def log_loss(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
     loss = _samplewise_log_loss(y_true, y_pred)
     mean_loss_all_samples = jnp.average(loss)
@@ -38,10 +40,9 @@ def squared_hinge(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
     return jnp.average(jnp.clip(1 - y_true * y_pred, 0, None) ** 2)
 
 
-# @jax.jit
-def sigmoid_focal_crossentropy(
-    y_true: jnp.ndarray, y_pred: jnp.ndarray, alpha: float = 0.25, gamma: float = 2.0
-) -> jnp.ndarray:
+@partial(jax.jit, static_argnums=(2, 3))
+def _sigmoid_focal_crossentropy(
+    y_true: jnp.ndarray, y_pred: jnp.ndarray, alpha: float, gamma: float) -> jnp.ndarray:
     """ Based on tensorflow_addons: https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/
         focal_loss.py#L90 """
     # If single dimension, assume binary classification problem
@@ -71,3 +72,10 @@ def sigmoid_focal_crossentropy(
     loss = (alpha_factor * modulating_factor * ce).sum(axis=1)
     mean_loss_all_samples = jnp.average(loss)
     return mean_loss_all_samples
+
+
+def sigmoid_focal_crossentropy(
+    y_true: jnp.ndarray, y_pred: jnp.ndarray, alpha: float = 0.25, gamma: float = 2.0
+) -> jnp.ndarray:
+    return _sigmoid_focal_crossentropy(y_true, y_pred, alpha, gamma)
+

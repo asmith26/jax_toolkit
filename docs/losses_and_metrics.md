@@ -48,10 +48,10 @@ https://scikit-learn.org/stable/modules/generated/sklearn.metrics.jaccard_score.
 https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn.metrics.matthews_corrcoef
 
 
-## Object detection
+## Bounding Box
 ### Losses
 ```python
-from jax_toolkit.losses.object_detection import giou_loss
+from jax_toolkit.losses.bounding_box import giou_loss
 
 giou_loss(boxes1: jnp.ndarray, boxes2: jnp.ndarray) -> jnp.ndarray
 # boxes are encoded as [y_min, x_min, y_max, x_max], e.g. jnp.array([[4.0, 3.0, 7.0, 5.0], [5.0, 6.0, 10.0, 7.0]])
