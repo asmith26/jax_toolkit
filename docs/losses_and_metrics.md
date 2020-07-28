@@ -1,9 +1,9 @@
 # Losses and Metrics
 
-Loss functions are normally minimised (e.g. for learning/optimising a model), and metrics are normally maximised (e.g for further evaluating the performance of a model). All loss and metric functions have been designed to work in a similar way to [scikit-learn metrics](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics) if available, otherwise [tensorflow](https://www.tensorflow.org/api_docs/python/tf)/[tensorflow addons](https://www.tensorflow.org/addons/api_docs/python/tfa/) (e.g. same names, similar implementations), and have the form:
+Loss functions are normally minimised (e.g. for learning/optimising a model), and metrics are normally maximised (e.g for further evaluating the performance of a model). Most loss and metric functions have been designed to work in a similar way to [scikit-learn metrics](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics) if available, otherwise [tensorflow](https://www.tensorflow.org/api_docs/python/tf)/[tensorflow addons](https://www.tensorflow.org/addons/api_docs/python/tfa/) (e.g. same names, similar implementations), and have the form:
 
 ```python
-function_name(y_true: jnp.ndarray, y_pred: jnp.ndarray, **kwargs) -> jnp.ndarray
+function_name(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray
 ``` 
 
 ## Classification
@@ -17,10 +17,6 @@ from jax_toolkit.losses.classification import LOSS_FUNCTION
 | [log_loss]() (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident (i.e. with probability 1) wrong predictions. |
 | [squared_hinge]() | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects `y_true` to be binary or multiclass classifications in the set {-1, +1}. |
 | [sigmoid_focal_crossentropy]() | Shown to be useful for classification when you have highly imbalanced classes (e.g. for ["object detection where the imbalance between the background class and other classes is extremely high"](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/SigmoidFocalCrossEntropy)). |
-
-
-| [giou_loss] | Generalized Intersection over Union (GIoU) is designed to improve on intersection_over_union (see below). |
-https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/giou_loss.py
 
 
 https://towardsdatascience.com/handling-class-imbalanced-data-using-a-loss-specifically-made-for-it-6e58fd65ffab
@@ -50,6 +46,20 @@ https://scikit-learn.org/stable/modules/generated/sklearn.metrics.jaccard_score.
 
 | [matthews_correlation_coefficient] | - Lots of symmetry (none of True/False Positives/Negatives are more important over another).<br/>- Good interpretability (1 := perfect prediction, 0 := random prediction, −1 := total disagreement between prediction & observation). |
 https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn.metrics.matthews_corrcoef
+
+
+## Object detection
+### Losses
+```python
+from jax_toolkit.losses.object_detection import giou_loss
+
+giou_loss(boxes1: jnp.ndarray, boxes2: jnp.ndarray) -> jnp.ndarray
+# boxes are encoded as [y_min, x_min, y_max, x_max], e.g. jnp.array([[4.0, 3.0, 7.0, 5.0], [5.0, 6.0, 10.0, 7.0]])
+```
+
+| Name | Notes |
+|---|---|
+| [giou_loss]() | Generalized Intersection over Union (GIoU) is designed to improve on intersection_over_union metric (benefits include being differentiable, so can use to train neural networks). More benefits and details can be found [here](https://giou.stanford.edu/). |
 
 
 ## Regression
@@ -107,7 +117,7 @@ loss_function = get_haiku_loss_function(net_transform, loss="mean_squared_error"
 
 # Train model,
 ...
-grads = grad(loss_function)(params, x, y)
+grads = jax.grad(loss_function)(params, x, y)
 ...
 ``` 
 
