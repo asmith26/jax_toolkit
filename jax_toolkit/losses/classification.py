@@ -6,8 +6,8 @@ import jax.numpy as jnp
 
 @jax.jit
 def _samplewise_log_loss(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
-    """ Based on scikit-learn: https://github.com/scikit-learn/scikit-learn/blob
-        /ffbb1b4a0bbb58fdca34a30856c6f7faace87c67/sklearn/metrics/_classification.py#L2123 """
+    """ Based on: https://github.com/scikit-learn/scikit-learn/blob/ffbb1b4a0bbb58fdca34a30856c6f7faace87c67/sklearn
+        /metrics/_classification.py#L2123 """
     # If single dimension, assume binary classification problem
     if y_true.ndim == 1:
         y_true = y_true[:, jnp.newaxis]
@@ -35,16 +35,15 @@ def log_loss(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
 
 @jax.jit
 def squared_hinge(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
-    """ Based on tensorflow: https://github.com/tensorflow/tensorflow/blob/af7fd02ca40f362c4ac96dd064d6a2224b65d784
-        /tensorflow/python/keras/losses.py#L1324 """
+    """ Based on: https://github.com/tensorflow/tensorflow/blob/af7fd02ca40f362c4ac96dd064d6a2224b65d784/tensorflow
+        /python/keras/losses.py#L1324 """
     return jnp.average(jnp.clip(1 - y_true * y_pred, 0, None) ** 2)
 
 
 @partial(jax.jit, static_argnums=(2, 3))
 def _sigmoid_focal_crossentropy(
     y_true: jnp.ndarray, y_pred: jnp.ndarray, alpha: float, gamma: float) -> jnp.ndarray:
-    """ Based on tensorflow_addons: https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/
-        focal_loss.py#L90 """
+    """ Based on: https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/focal_loss.py#L90 """
     # If single dimension, assume binary classification problem
     if y_true.ndim == 1:
         y_true = y_true[:, jnp.newaxis]

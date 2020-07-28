@@ -39,10 +39,7 @@ from jax_toolkit.metrics.classification import LOSS_FUNCTION
 |---|---|
 | [balanced_accuracy] | Good interpretability, thus useful for displaying/explaining results.  |
 https://scikit-learn.org/stable/modules/generated/sklearn.metrics.balanced_accuracy_score.html#sklearn.metrics.balanced_accuracy_score
-
-| [intersection_over_union] (aka. Jaccard Index) | Useful for image segmentation problems, including for handling imbalanced classes (it gives all classes equal weight). |
-https://github.com/keras-team/keras-contrib/blob/master/keras_contrib/losses/jaccard.py#L4
-https://scikit-learn.org/stable/modules/generated/sklearn.metrics.jaccard_score.html#sklearn.metrics.jaccard_score
+| [intersection_over_union]() (aka. Jaccard Index) | Useful for image segmentation problems, including for handling imbalanced classes (it gives all classes equal weight). |
 
 | [matthews_correlation_coefficient] | - Lots of symmetry (none of True/False Positives/Negatives are more important over another).<br/>- Good interpretability (1 := perfect prediction, 0 := random prediction, −1 := total disagreement between prediction & observation). |
 https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn.metrics.matthews_corrcoef
