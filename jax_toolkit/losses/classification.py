@@ -41,8 +41,7 @@ def squared_hinge(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
 
 
 @partial(jax.jit, static_argnums=(2, 3))
-def _sigmoid_focal_crossentropy(
-    y_true: jnp.ndarray, y_pred: jnp.ndarray, alpha: float, gamma: float) -> jnp.ndarray:
+def _sigmoid_focal_crossentropy(y_true: jnp.ndarray, y_pred: jnp.ndarray, alpha: float, gamma: float) -> jnp.ndarray:
     """ Based on: https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/focal_loss.py#L90 """
     # If single dimension, assume binary classification problem
     if y_true.ndim == 1:
@@ -77,4 +76,3 @@ def sigmoid_focal_crossentropy(
     y_true: jnp.ndarray, y_pred: jnp.ndarray, alpha: float = 0.25, gamma: float = 2.0
 ) -> jnp.ndarray:
     return _sigmoid_focal_crossentropy(y_true, y_pred, alpha, gamma)
-
