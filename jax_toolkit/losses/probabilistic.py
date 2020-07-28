@@ -4,8 +4,7 @@ import jax.numpy as jnp
 
 @jax.jit
 def kullback_leibler_divergence(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
-    """ Based on tensorflow: https://github.com/tensorflow/tensorflow/blob/v2.2.0/tensorflow/python/keras/losses.py
-        #L1598-L1636 """
+    """ Based on: https://github.com/tensorflow/tensorflow/blob/v2.2.0/tensorflow/python/keras/losses.py#L1598-L1636 """
     # Expand if single dimension
     if y_true.ndim == 1:
         y_true = y_true[:, jnp.newaxis]
