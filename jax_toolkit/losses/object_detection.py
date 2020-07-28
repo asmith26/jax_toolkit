@@ -2,7 +2,7 @@ import jax
 import jax.numpy as jnp
 
 
-# @jax.jit
+@jax.jit
 def _giou(boxes1: jnp.ndarray, boxes2: jnp.ndarray) -> jnp.ndarray:
     b1_ymin, b1_xmin, b1_ymax, b1_xmax = jnp.hsplit(boxes1, 4)
     b2_ymin, b2_xmin, b2_ymax, b2_xmax = jnp.hsplit(boxes2, 4)
@@ -38,12 +38,15 @@ def _giou(boxes1: jnp.ndarray, boxes2: jnp.ndarray) -> jnp.ndarray:
     return giou.squeeze()
 
 
-# @jax.jit
+@jax.jit
 def giou_loss(boxes1: jnp.ndarray, boxes2: jnp.ndarray) -> jnp.ndarray:
     """ Based on tensorflow-addons: https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses
         /giou_loss.py#L65
 
         boxes are encoded as [y_min, x_min, y_max, x_max], e.g. jnp.array([[4.0, 3.0, 7.0, 5.0], [5.0, 6.0, 10.0, 7.0]])
     """
+    if len(boxes1) != len(boxes2):
+        raise ValueError(f"len(boxes1) != len(boxes2): {len(boxes1)} != {len(boxes2)}")
+
     giou = _giou(boxes1, boxes2)
     return 1 - giou
