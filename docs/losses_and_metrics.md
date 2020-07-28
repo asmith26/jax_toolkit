@@ -59,7 +59,7 @@ giou_loss(boxes1: jnp.ndarray, boxes2: jnp.ndarray) -> jnp.ndarray
 
 | Name | Notes |
 |---|---|
-| [giou_loss]() | Generalized Intersection over Union (GIoU) is designed to improve on intersection_over_union metric (benefits include being differentiable, so can be used as a loss function for training a neural network. More benefits and details can be found [here](https://giou.stanford.edu/). |
+| [giou_loss]() | Generalized Intersection over Union (GIoU) is designed to improve on intersection_over_union metric (benefits include being differentiable, so can use to train neural networks). More benefits and details can be found [here](https://giou.stanford.edu/). |
 
 
 ## Regression
@@ -117,7 +117,7 @@ loss_function = get_haiku_loss_function(net_transform, loss="mean_squared_error"
 
 # Train model,
 ...
-grads = grad(loss_function)(params, x, y)
+grads = jax.grad(loss_function)(params, x, y)
 ...
 ``` 
 
