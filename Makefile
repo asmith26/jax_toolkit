@@ -45,6 +45,9 @@ lint-fix:                                    ## Automatically fix style violatio
 pip-compile:                                 ## Compile requirements.txt from setup.py
 	pip-compile
 
+pip-install:                                 ## Install dependencies into current environment
+	pip install -r requirements-dev.txt
+
 pip-sync:                                    ## Update your conda/virtual environment to reflect exactly (this will install/upgrade/uninstall everything necessary) what's in requirements.txt
 	pip-sync
 
