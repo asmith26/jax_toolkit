@@ -4,8 +4,8 @@ from jax.ops import index, index_update
 
 # @jax.jit
 def r2_score(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
-    """ Based on scikit-learn: https://github.com/scikit-learn/scikit-learn/blob
-        /ffbb1b4a0bbb58fdca34a30856c6f7faace87c67/sklearn/metrics/_regression.py#L513 """
+    """Based on scikit-learn: https://github.com/scikit-learn/scikit-learn/blob
+    /ffbb1b4a0bbb58fdca34a30856c6f7faace87c67/sklearn/metrics/_regression.py#L513"""
     numerator = ((y_true - y_pred) ** 2).sum(axis=0)
     denominator = ((y_true - jnp.average(y_true, axis=0)) ** 2).sum(axis=0)
     if denominator.sum() == 0:  # i.e. constant y_true
