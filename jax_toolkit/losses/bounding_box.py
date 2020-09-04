@@ -40,9 +40,9 @@ def _giou(boxes1: jnp.ndarray, boxes2: jnp.ndarray) -> jnp.ndarray:
 
 @jax.jit
 def giou_loss(boxes1: jnp.ndarray, boxes2: jnp.ndarray) -> jnp.ndarray:
-    """ Based on: https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/giou_loss.py#L65
+    """Based on: https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/giou_loss.py#L65
 
-        boxes are encoded as [y_min, x_min, y_max, x_max], e.g. jnp.array([[4.0, 3.0, 7.0, 5.0], [5.0, 6.0, 10.0, 7.0]])
+    boxes are encoded as [y_min, x_min, y_max, x_max], e.g. jnp.array([[4.0, 3.0, 7.0, 5.0], [5.0, 6.0, 10.0, 7.0]])
     """
     if len(boxes1) != len(boxes2):
         raise ValueError(f"len(boxes1) != len(boxes2): {len(boxes1)} != {len(boxes2)}")
