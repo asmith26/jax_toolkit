@@ -1,5 +1,7 @@
 # Losses and Metrics
 
+The `lossses` and `metrics` modules contain some commonly used such functions implemented with jax to benefit from [jax primitives](https://jax.readthedocs.io/en/latest/notebooks/How_JAX_primitives_work.html) like `grad` and `jit`. The documentation below also lists some commonly used such metrics that we have not implemented in jax, and we instead point readers to well-used implementations (often scikit-learn, marked with an asterisk *). Such functions have not been implemented because we believe they will not be required to work with the [jax primitives](https://jax.readthedocs.io/en/latest/notebooks/How_JAX_primitives_work.html) (e.g. metrics do not often need to be differentiated) - of course if you feel this library would benefit from such implementations, contributions are very welcome. 
+
 Loss functions are normally minimised (e.g. for learning/optimising a model), and metrics are normally maximised (e.g for further evaluating the performance of a model). Most loss and metric functions have been designed to work in a similar way to [scikit-learn metrics](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics) if available, otherwise [tensorflow](https://www.tensorflow.org/api_docs/python/tf)/[tensorflow addons](https://www.tensorflow.org/addons/api_docs/python/tfa/) (e.g. same names, similar implementations), and have the form:
 
 ```python
@@ -18,7 +20,6 @@ from jax_toolkit.losses.classification import LOSS_FUNCTION
 | [squared_hinge]() | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects `y_true` to be binary or multiclass classifications in the set {-1, +1}. |
 | [sigmoid_focal_crossentropy]() | Shown to be useful for classification when you have highly imbalanced classes (e.g. for ["object detection where the imbalance between the background class and other classes is extremely high"](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/SigmoidFocalCrossEntropy)). |
 
-
 https://towardsdatascience.com/handling-class-imbalanced-data-using-a-loss-specifically-made-for-it-6e58fd65ffab
 
 ![comparing_loss_functions_when_y_true=0 plot](img/comparing_loss_functions_when_y_true=0.png)
@@ -28,8 +29,6 @@ https://towardsdatascience.com/handling-class-imbalanced-data-using-a-loss-speci
 ![squared_hinge plot](img/squared_hinge.png)
 ![sigmoid_foca lcrossentropy plt](img/sigmoid_focal_crossentropy.png)
 
-
-
 #### Metrics
 ```python
 from jax_toolkit.metrics.classification import LOSS_FUNCTION
@@ -37,13 +36,9 @@ from jax_toolkit.metrics.classification import LOSS_FUNCTION
 
 | Name | Notes |
 |---|---|
-| [balanced_accuracy] | Good interpretability, thus useful for displaying/explaining results.  |
-https://scikit-learn.org/stable/modules/generated/sklearn.metrics.balanced_accuracy_score.html#sklearn.metrics.balanced_accuracy_score
+| [balanced_accuracy_score*](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.balanced_accuracy_score.html#sklearn-metrics-balanced-accuracy-score) | Good interpretability, thus useful for displaying/explaining results. |
 | [intersection_over_union]() (aka. Jaccard Index) | Useful for image segmentation problems, including for handling imbalanced classes (it gives all classes equal weight). |
-
-| [matthews_correlation_coefficient] | - Lots of symmetry (none of True/False Positives/Negatives are more important over another).<br/>- Good interpretability (1 := perfect prediction, 0 := random prediction, −1 := total disagreement between prediction & observation). |
-https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn.metrics.matthews_corrcoef
-
+| [matthews_correlation_coefficient*](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn-metrics-matthews-corrcoef) | - Lots of symmetry (none of True/False Positives/Negatives are more important over another).<br/>- Good interpretability<br/>&nbsp;&nbsp;1 := perfect prediction<br/>&nbsp;&nbsp;0 := random prediction<br/>&nbsp;&nbsp;−1 := total disagreement between prediction & observation) |
 
 ## Bounding Box
 ### Losses
