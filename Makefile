@@ -23,7 +23,7 @@ coverage-with-report:  coverage              ## Run tests with coverage and repo
 	coverage html
 	firefox htmlcov/index.html
 
-doc-deploy: doc-generate-api                 ## Deploy doc to github pages
+doc-deploy:                                  ## Deploy doc to github pages
 	mkdocs gh-deploy
 
 doc-serve-locally:				             ## Serve docs locally
