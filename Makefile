@@ -16,7 +16,7 @@ clean:                                       ## Remove all coverage, lint, test 
 	rm -rf *.egg-info
 
 coverage:                                    ## Run tests with coverage and report
-	coverage run -m nose2 -v
+	coverage run --omit="*/tests/*" -m nose2 -v
 	coverage report
 
 coverage-with-report:  coverage              ## Run tests with coverage and report, and open in firefox
@@ -50,5 +50,8 @@ pip-install:                                 ## Install dependencies into curren
 
 pip-sync:                                    ## Update your conda/virtual environment to reflect exactly (this will install/upgrade/uninstall everything necessary) what's in requirements.txt
 	pip-sync
+
+pip-sync-dev: pip-sync pip-install           ## Update your conda/virtual environment to reflect exactly what's in requirements.txt, and then install the dev requirements.
+	pip install .\[losses_utils\]
 
 test-all: clean lint coverage-with-report    ## Run all checks
