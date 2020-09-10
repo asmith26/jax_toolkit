@@ -497,7 +497,7 @@
 <tbody>
 <tr>
 <td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/bounding_box.py#L6">giou_loss</a></td>
-<td>Generalized Intersection over Union (GIoU) is designed to improve on intersection_over_union metric (benefits include being differentiable, so can use to train neural networks). More benefits and details can be found <a href="https://giou.stanford.edu/">here</a>.</td>
+<td>Generalized Intersection over Union (GIoU) is designed to improve on the Intersection over Union metric. Benefits include being differentiable, so that is can be used to train neural networks. More benefits and details can be found <a href="https://giou.stanford.edu/">here</a>.</td>
 </tr>
 </tbody>
 </table>
@@ -516,11 +516,11 @@
 <tbody>
 <tr>
 <td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/classification.py#L30">log_loss</a> (aka. binary/multi-class log loss or binary/categorical crossentropy)</td>
-<td>This applies a large penalty for confident (i.e. with probability 1) wrong predictions.</td>
+<td>This applies a large penalty for confident, wrong predictions (see plots below).</td>
 </tr>
 <tr>
 <td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/classification.py#L37">squared_hinge</a></td>
-<td>This has been shown to converge faster, provide better performance and be more robust to noise (see <a href="https://arxiv.org/abs/1702.05659">this paper</a>). Expects <code>y_true</code> to be binary or multiclass classifications in the set {-1, +1}.</td>
+<td>This has been shown to converge faster, provide better performance and be more robust to noise (see <a href="https://arxiv.org/abs/1702.05659">this paper</a>). Expects <code>y_true</code> to be <code>-1</code> or <code>+1</code>.</td>
 </tr>
 <tr>
 <td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/classification.py#L75">sigmoid_focal_crossentropy</a></td>
@@ -587,7 +587,7 @@
 </tr>
 <tr>
 <td><a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn-metrics-matthews-corrcoef">matthews_correlation_coefficient*</a></td>
-<td>- Lots of symmetry (none of True/False Positives/Negatives are more important over another).<br/>- Good interpretability<br/>&nbsp;&nbsp;1 := perfect prediction<br/>&nbsp;&nbsp;0 := random prediction<br/>&nbsp;&nbsp;−1 := total disagreement between prediction &amp; observation)</td>
+<td>- Lots of symmetry (none of True/False Positives/Negatives are more important over another).<br/>- Good interpretability<br/>&nbsp;&nbsp;<code>1</code> := perfect prediction<br/>&nbsp;&nbsp;<code>0</code> := random prediction<br/>&nbsp;&nbsp;<code>−1</code> := total disagreement between prediction &amp; observation</td>
 </tr>
 </tbody>
 </table>
@@ -606,7 +606,7 @@
 <tbody>
 <tr>
 <td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/probabilistic.py#L6">kullback_leibler_divergence</a></td>
-<td>Measure how the probability distributions of y_true and y_pred differ (0 := identical). Often used in generative modelling.</td>
+<td>Measure how the probability distributions of <code>y_true</code> and <code>y_pred</code> differ (<code>0</code> means identical). Often used in generative modelling.</td>
 </tr>
 </tbody>
 </table>
@@ -641,7 +641,7 @@
 </tr>
 <tr>
 <td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/regression.py#L32">mean_squared_log_error</a></td>
-<td>For problems where y_true has a wide spread or large values, this does not punish a model as heavily as mean squared error.</td>
+<td>For problems where <code>y_true</code> has a wide spread or large values, this does not punish a model as heavily as mean squared error.</td>
 </tr>
 </tbody>
 </table>
@@ -668,6 +668,9 @@
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">haiku</span> <span class="k">as</span> <span class="nn">hk</span>
 <span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="kn">from</span> <span class="nn">jax_toolkit.losses.utils</span> <span class="kn">import</span> <span class="n">get_haiku_loss_function</span>
+
 
 <span class="k">def</span> <span class="nf">net_function</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="n">net</span> <span class="o">=</span> <span class="n">hk</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
