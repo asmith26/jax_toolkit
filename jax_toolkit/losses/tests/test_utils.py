@@ -16,9 +16,7 @@ class TestGetHaikuLossFunction(unittest.TestCase):
         import jax.numpy as jnp
 
         def net_function(x: jnp.ndarray) -> jnp.ndarray:
-            net = hk.Sequential([
-                jax.nn.relu
-            ])
+            net = hk.Sequential([jax.nn.relu])
             predictions: jnp.ndarray = net(x)
             return predictions
 
@@ -28,7 +26,7 @@ class TestGetHaikuLossFunction(unittest.TestCase):
 
         # Check works
         rng = jax.random.PRNGKey(42)
-        params = net_transform.init(jax.random.PRNGKey(42), jnp.array(0))
+        params = net_transform.init(rng, jnp.array(0))
 
         self.assertEqual(0, actual_loss_function_wrapper(params, jnp.array(0), jnp.array(0)))
         self.assertEqual(0, actual_loss_function_wrapper(params, jnp.array(1), jnp.array(1)))
