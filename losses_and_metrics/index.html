@@ -1,0 +1,736 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>Losses and Metrics - jax_toolkit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#losses-and-metrics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="jax_toolkit" class="md-header-nav__button md-logo" aria-label="jax_toolkit">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            jax_toolkit
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Losses and Metrics
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/asmith26/jax_toolkit/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="jax_toolkit" class="md-nav__button md-logo" aria-label="jax_toolkit">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    jax_toolkit
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/asmith26/jax_toolkit/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Losses and Metrics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Losses and Metrics" class="md-nav__link md-nav__link--active">
+      Losses and Metrics
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bounding-box" class="md-nav__link">
+    Bounding Box
+  </a>
+  
+    <nav class="md-nav" aria-label="Bounding Box">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#losses" class="md-nav__link">
+    Losses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classification" class="md-nav__link">
+    Classification
+  </a>
+  
+    <nav class="md-nav" aria-label="Classification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#losses_1" class="md-nav__link">
+    Losses
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    Metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probabilistic" class="md-nav__link">
+    Probabilistic
+  </a>
+  
+    <nav class="md-nav" aria-label="Probabilistic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#losses_2" class="md-nav__link">
+    Losses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regression" class="md-nav__link">
+    Regression
+  </a>
+  
+    <nav class="md-nav" aria-label="Regression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#losses_3" class="md-nav__link">
+    Losses
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics_1" class="md-nav__link">
+    Metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utils" class="md-nav__link">
+    Utils
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#useful-resources" class="md-nav__link">
+    Useful resources
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bounding-box" class="md-nav__link">
+    Bounding Box
+  </a>
+  
+    <nav class="md-nav" aria-label="Bounding Box">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#losses" class="md-nav__link">
+    Losses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classification" class="md-nav__link">
+    Classification
+  </a>
+  
+    <nav class="md-nav" aria-label="Classification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#losses_1" class="md-nav__link">
+    Losses
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics" class="md-nav__link">
+    Metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#probabilistic" class="md-nav__link">
+    Probabilistic
+  </a>
+  
+    <nav class="md-nav" aria-label="Probabilistic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#losses_2" class="md-nav__link">
+    Losses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regression" class="md-nav__link">
+    Regression
+  </a>
+  
+    <nav class="md-nav" aria-label="Regression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#losses_3" class="md-nav__link">
+    Losses
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metrics_1" class="md-nav__link">
+    Metrics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utils" class="md-nav__link">
+    Utils
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#useful-resources" class="md-nav__link">
+    Useful resources
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/asmith26/jax_toolkit/edit/master/docs/losses_and_metrics.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="losses-and-metrics">Losses and Metrics<a class="headerlink" href="#losses-and-metrics" title="Permanent link">&para;</a></h1>
+<p>The <code>lossses</code> and <code>metrics</code> modules contain some commonly used such functions implemented with jax to benefit from <a href="https://jax.readthedocs.io/en/latest/notebooks/How_JAX_primitives_work.html">jax primitives</a> like <code>grad</code> and <code>jit</code>. The documentation below also lists some commonly used such metrics that we have not implemented in jax, and we instead point readers to well-used implementations (often scikit-learn, marked with an asterisk *). Such functions have not been implemented because we believe they will not be required to work with the <a href="https://jax.readthedocs.io/en/latest/notebooks/How_JAX_primitives_work.html">jax primitives</a> (e.g. metrics do not often need to be differentiated) - of course if you feel this library would benefit from such implementations, contributions are very welcome. </p>
+<p>Loss functions are normally minimised (e.g. for learning/optimising a model), and metrics are normally maximised (e.g for further evaluating the performance of a model). Most loss and metric functions have been designed to work in a similar way to <a href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics">scikit-learn metrics</a> if available, otherwise <a href="https://www.tensorflow.org/api_docs/python/tf">tensorflow</a>/<a href="https://www.tensorflow.org/addons/api_docs/python/tfa/">tensorflow addons</a> (e.g. same names, similar implementations), and have the form:</p>
+<div class="highlight"><pre><span></span><code><span class="n">function_name</span><span class="p">(</span><span class="n">y_true</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+</code></pre></div>
+
+<h2 id="bounding-box">Bounding Box<a class="headerlink" href="#bounding-box" title="Permanent link">&para;</a></h2>
+<h3 id="losses">Losses<a class="headerlink" href="#losses" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jax_toolkit.losses.bounding_box</span> <span class="kn">import</span> <span class="n">giou_loss</span>
+
+<span class="n">giou_loss</span><span class="p">(</span><span class="n">boxes1</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">boxes2</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="c1"># boxes are encoded as [y_min, x_min, y_max, x_max], e.g. jnp.array([[4.0, 3.0, 7.0, 5.0], [5.0, 6.0, 10.0, 7.0]])</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/bounding_box.py#L6">giou_loss</a></td>
+<td>Generalized Intersection over Union (GIoU) is designed to improve on intersection_over_union metric (benefits include being differentiable, so can use to train neural networks). More benefits and details can be found <a href="https://giou.stanford.edu/">here</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="classification">Classification<a class="headerlink" href="#classification" title="Permanent link">&para;</a></h2>
+<h4 id="losses_1">Losses<a class="headerlink" href="#losses_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jax_toolkit.losses.classification</span> <span class="kn">import</span> <span class="n">LOSS_FUNCTION</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/classification.py#L30">log_loss</a> (aka. binary/multi-class log loss or binary/categorical crossentropy)</td>
+<td>This applies a large penalty for confident (i.e. with probability 1) wrong predictions.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/classification.py#L37">squared_hinge</a></td>
+<td>This has been shown to converge faster, provide better performance and be more robust to noise (see <a href="https://arxiv.org/abs/1702.05659">this paper</a>). Expects <code>y_true</code> to be binary or multiclass classifications in the set {-1, +1}.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/classification.py#L75">sigmoid_focal_crossentropy</a></td>
+<td>Shown to be useful for classification when you have highly imbalanced classes (e.g. for <a href="https://www.tensorflow.org/addons/api_docs/python/tfa/losses/SigmoidFocalCrossEntropy">"object detection where the imbalance between the background class and other classes is extremely high"</a>).</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="center">y_true = 0</th>
+<th align="center">y_true = 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><img alt="" src="../img/comparing_loss_functions_when_y_true%3D0.png" /></td>
+<td align="center"><img alt="" src="../img/comparing_loss_functions_when_y_true%3D1.png" /></td>
+</tr>
+</tbody>
+</table>
+<p><img alt="" src="../img/colour_schemes.png" /></p>
+<table>
+<thead>
+<tr>
+<th align="center">Loss</th>
+<th align="center">Plot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">log_loss</td>
+<td align="center"><img alt="" src="../img/log_loss.png" /></td>
+</tr>
+<tr>
+<td align="center">squared_hinge</td>
+<td align="center"><img alt="" src="../img/squared_hinge.png" /></td>
+</tr>
+<tr>
+<td align="center">sigmoid_focal_crossentropy</td>
+<td align="center"><img alt="" src="../img/sigmoid_focal_crossentropy.png" /></td>
+</tr>
+</tbody>
+</table>
+<h4 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jax_toolkit.metrics.classification</span> <span class="kn">import</span> <span class="n">LOSS_FUNCTION</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.balanced_accuracy_score.html#sklearn-metrics-balanced-accuracy-score">balanced_accuracy_score*</a></td>
+<td>Good interpretability, thus useful for displaying/explaining results.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/metrics/classification.py#L14">intersection_over_union</a> (aka. Jaccard Index)</td>
+<td>Useful for image segmentation problems, including for handling imbalanced classes (it gives all classes equal weight).</td>
+</tr>
+<tr>
+<td><a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn-metrics-matthews-corrcoef">matthews_correlation_coefficient*</a></td>
+<td>- Lots of symmetry (none of True/False Positives/Negatives are more important over another).<br/>- Good interpretability<br/>&nbsp;&nbsp;1 := perfect prediction<br/>&nbsp;&nbsp;0 := random prediction<br/>&nbsp;&nbsp;−1 := total disagreement between prediction &amp; observation)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="probabilistic">Probabilistic<a class="headerlink" href="#probabilistic" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jax_toolkit.losses.probabilistic</span> <span class="kn">import</span> <span class="n">kullback_leibler_divergence</span>
+</code></pre></div>
+
+<h4 id="losses_2">Losses<a class="headerlink" href="#losses_2" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/probabilistic.py#L6">kullback_leibler_divergence</a></td>
+<td>Measure how the probability distributions of y_true and y_pred differ (0 := identical). Often used in generative modelling.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="regression">Regression<a class="headerlink" href="#regression" title="Permanent link">&para;</a></h2>
+<h4 id="losses_3">Losses<a class="headerlink" href="#losses_3" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jax_toolkit.losses.regression</span> <span class="kn">import</span> <span class="n">LOSS_FUNCTION</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/regression.py#L6">mean_absolute_error</a></td>
+<td>Good interpretability, thus useful for displaying/explaining results.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/regression.py#L13">median_absolute_error</a></td>
+<td>- Good interpretability.<br/>- Median can be more robust that the mean (e.g the mean number of legs a dog has is less than 4, whilst the median is 4).</td>
+</tr>
+<tr>
+<td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/regression.py#L20">max_absolute_error</a></td>
+<td>Good interpretability.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/regression.py#L27">mean_squared_error</a></td>
+<td>Relatively simple and (mathematically) convenient.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/regression.py#L32">mean_squared_log_error</a></td>
+<td>For problems where y_true has a wide spread or large values, this does not punish a model as heavily as mean squared error.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="metrics_1">Metrics<a class="headerlink" href="#metrics_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jax_toolkit.metrics.regression</span> <span class="kn">import</span> <span class="n">LOSS_FUNCTION</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/metrics/regression.py#L6">r2_score</a></td>
+<td>Indication of goodness of fit.<br/>- <code>0</code> := constant model that always predicts the mean of y<br/>- <code>1</code> := perfect fit</td>
+</tr>
+</tbody>
+</table>
+<h2 id="utils">Utils<a class="headerlink" href="#utils" title="Permanent link">&para;</a></h2>
+<p>If you are familiar with <a href="https://github.com/deepmind/dm-haiku">haiku</a>, a JAX-based neural network library, you can use the <a href="https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/utils.py#L44"><code>get_haiku_loss_function()</code></a> function to get a loss from jax_toolkit that can be used with haiku:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">haiku</span> <span class="k">as</span> <span class="nn">hk</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="k">def</span> <span class="nf">net_function</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="n">hk</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+        <span class="o">...</span>
+    <span class="p">])</span>
+    <span class="n">predictions</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">predictions</span>
+<span class="n">net_transform</span> <span class="o">=</span> <span class="n">hk</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">net_function</span><span class="p">)</span>
+
+<span class="n">loss_function</span> <span class="o">=</span> <span class="n">get_haiku_loss_function</span><span class="p">(</span><span class="n">net_transform</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mean_squared_error&quot;</span><span class="p">)</span>
+
+<span class="c1"># Train model,</span>
+<span class="o">...</span>
+<span class="n">grads</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss_function</span><span class="p">)(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="o">...</span>
+</code></pre></div>
+
+<h2 id="useful-resources">Useful resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h2>
+<p>[1] <a href="https://neptune.ai/blog/evaluation-metrics-binary-classification">24 Evaluation Metrics for Binary Classification (And When to Use Them)</a></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
