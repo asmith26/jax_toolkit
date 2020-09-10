@@ -7,7 +7,7 @@
 absl-py==0.10.0            # via jax, jaxlib
 jax==0.1.76               # via jax_toolkit (setup.py)
 jaxlib==0.1.52            # via jax_toolkit (setup.py)
-numpy==1.19.1             # via jax, jaxlib, opt-einsum, scipy
+numpy==1.19.2             # via jax, jaxlib, opt-einsum, scipy
 opt-einsum==3.3.0         # via jax
 scipy==1.5.2              # via jaxlib
 six==1.15.0               # via absl-py
