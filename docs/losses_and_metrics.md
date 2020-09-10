@@ -20,14 +20,18 @@ from jax_toolkit.losses.classification import LOSS_FUNCTION
 | [squared_hinge]() | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects `y_true` to be binary or multiclass classifications in the set {-1, +1}. |
 | [sigmoid_focal_crossentropy]() | Shown to be useful for classification when you have highly imbalanced classes (e.g. for ["object detection where the imbalance between the background class and other classes is extremely high"](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/SigmoidFocalCrossEntropy)). |
 
-https://towardsdatascience.com/handling-class-imbalanced-data-using-a-loss-specifically-made-for-it-6e58fd65ffab
 
-![comparing_loss_functions_when_y_true=0 plot](img/comparing_loss_functions_when_y_true=0.png)
-![comparing_loss_functions_when_y_true=1 plot](img/comparing_loss_functions_when_y_true=1.png)
+y_true = 0 | y_true = 1
+:---:|:---:
+![](img/comparing_loss_functions_when_y_true=0.png)  |  ![](img/comparing_loss_functions_when_y_true=1.png)
 
-![log_loss plot](img/log_loss.png)
-![squared_hinge plot](img/squared_hinge.png)
-![sigmoid_foca lcrossentropy plt](img/sigmoid_focal_crossentropy.png)
+![](img/colour_schemes.png)
+
+Loss | Plot
+:---:|:---:
+log_loss | ![](img/log_loss.png)
+squared_hinge | ![](img/squared_hinge.png)
+sigmoid_focal_crossentropy | ![](img/sigmoid_focal_crossentropy.png)
 
 #### Metrics
 ```python
