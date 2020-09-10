@@ -26,3 +26,9 @@ def max_absolute_error(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
 @jax.jit
 def mean_squared_error(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
     return jnp.average((y_true - y_pred) ** 2)
+
+
+@jax.jit
+def mean_squared_log_error(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
+    """ Based on: https://github.com/scikit-learn/scikit-learn/blob/0fb307bf3/sklearn/metrics/_regression.py#L274 """
+    return mean_squared_error(jnp.log1p(y_true), jnp.log1p(y_pred))

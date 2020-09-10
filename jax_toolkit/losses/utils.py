@@ -3,13 +3,14 @@ from typing import Callable, Dict
 import jax
 import jax.numpy as jnp
 
-from jax_toolkit.losses.classification import log_loss, squared_hinge
+from jax_toolkit.losses.bounding_box import giou_loss
+from jax_toolkit.losses.classification import log_loss, squared_hinge, sigmoid_focal_crossentropy
 from jax_toolkit.losses.probabilistic import kullback_leibler_divergence
 from jax_toolkit.losses.regression import (
     max_absolute_error,
     mean_absolute_error,
     mean_squared_error,
-    median_absolute_error,
+    median_absolute_error, mean_squared_log_error,
 )
 
 try:
@@ -22,13 +23,23 @@ except ModuleNotFoundError as e:  # pragma: no cover
 
 
 SUPPORTED_LOSSES: Dict[str, Callable[[jnp.ndarray, jnp.ndarray], jnp.ndarray]] = {
+    # Classification
+    "giou_loss": giou_loss,
+
+    # Classification
     "log_loss": log_loss,
     "squared_hinge": squared_hinge,
+    "sigmoid_focal_crossentropy": sigmoid_focal_crossentropy,
+
+    # Probabilistic
     "kullback_leibler_divergence": kullback_leibler_divergence,
+
+    # Regression
     "mean_absolute_error": mean_absolute_error,
     "median_absolute_error": median_absolute_error,
     "max_absolute_error": max_absolute_error,
     "mean_squared_error": mean_squared_error,
+    "mean_squared_log_error": mean_squared_log_error,
 }
 
 
