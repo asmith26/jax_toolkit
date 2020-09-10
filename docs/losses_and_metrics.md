@@ -20,7 +20,7 @@ giou_loss(boxes1: jnp.ndarray, boxes2: jnp.ndarray) -> jnp.ndarray
 
 | Name | Notes |
 |---|---|
-| [giou_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/bounding_box.py#L6) | Generalized Intersection over Union (GIoU) is designed to improve on intersection_over_union metric (benefits include being differentiable, so can use to train neural networks). More benefits and details can be found [here](https://giou.stanford.edu/). |
+| [giou_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/bounding_box.py#L6) | Generalized Intersection over Union (GIoU) is designed to improve on the Intersection over Union metric. Benefits include being differentiable, so that is can be used to train neural networks. More benefits and details can be found [here](https://giou.stanford.edu/). |
 
 
 ## Classification
@@ -31,8 +31,8 @@ from jax_toolkit.losses.classification import LOSS_FUNCTION
 
 | Name | Notes |
 |---|---|
-| [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/classification.py#L30) (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident (i.e. with probability 1) wrong predictions. |
-| [squared_hinge](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/classification.py#L37) | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects `y_true` to be binary or multiclass classifications in the set {-1, +1}. |
+| [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/classification.py#L30) (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident, wrong predictions (see plots below). |
+| [squared_hinge](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/classification.py#L37) | This has been shown to converge faster, provide better performance and be more robust to noise (see [this paper](https://arxiv.org/abs/1702.05659)). Expects `y_true` to be `-1` or `+1`. |
 | [sigmoid_focal_crossentropy](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/classification.py#L75) | Shown to be useful for classification when you have highly imbalanced classes (e.g. for ["object detection where the imbalance between the background class and other classes is extremely high"](https://www.tensorflow.org/addons/api_docs/python/tfa/losses/SigmoidFocalCrossEntropy)). |
 
 
@@ -57,7 +57,7 @@ from jax_toolkit.metrics.classification import LOSS_FUNCTION
 |---|---|
 | [balanced_accuracy_score*](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.balanced_accuracy_score.html#sklearn-metrics-balanced-accuracy-score) | Good interpretability, thus useful for displaying/explaining results. |
 | [intersection_over_union](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/metrics/classification.py#L14) (aka. Jaccard Index) | Useful for image segmentation problems, including for handling imbalanced classes (it gives all classes equal weight). |
-| [matthews_correlation_coefficient*](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn-metrics-matthews-corrcoef) | - Lots of symmetry (none of True/False Positives/Negatives are more important over another).<br/>- Good interpretability<br/>&nbsp;&nbsp;1 := perfect prediction<br/>&nbsp;&nbsp;0 := random prediction<br/>&nbsp;&nbsp;−1 := total disagreement between prediction & observation) |
+| [matthews_correlation_coefficient*](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.matthews_corrcoef.html#sklearn-metrics-matthews-corrcoef) | - Lots of symmetry (none of True/False Positives/Negatives are more important over another).<br/>- Good interpretability<br/>&nbsp;&nbsp;`1` := perfect prediction<br/>&nbsp;&nbsp;`0` := random prediction<br/>&nbsp;&nbsp;`−1` := total disagreement between prediction & observation |
 
 
 ## Probabilistic
@@ -68,7 +68,7 @@ from jax_toolkit.losses.probabilistic import kullback_leibler_divergence
 #### Losses
 | Name | Notes |
 |---|---|
-| [kullback_leibler_divergence](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/probabilistic.py#L6) | Measure how the probability distributions of y_true and y_pred differ (0 := identical). Often used in generative modelling. |
+| [kullback_leibler_divergence](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/probabilistic.py#L6) | Measure how the probability distributions of `y_true` and `y_pred` differ (`0` means identical). Often used in generative modelling. |
 
 
 ## Regression
@@ -83,7 +83,7 @@ from jax_toolkit.losses.regression import LOSS_FUNCTION
 | [median_absolute_error](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/regression.py#L13) | - Good interpretability.<br/>- Median can be more robust that the mean (e.g the mean number of legs a dog has is less than 4, whilst the median is 4). |
 | [max_absolute_error](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/regression.py#L20) | Good interpretability. |
 | [mean_squared_error](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/regression.py#L27) | Relatively simple and (mathematically) convenient. |
-| [mean_squared_log_error](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/regression.py#L32) | For problems where y_true has a wide spread or large values, this does not punish a model as heavily as mean squared error. |
+| [mean_squared_log_error](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/regression.py#L32) | For problems where `y_true` has a wide spread or large values, this does not punish a model as heavily as mean squared error. |
 
 #### Metrics
 ```python
@@ -102,6 +102,9 @@ If you are familiar with [haiku](https://github.com/deepmind/dm-haiku), a JAX-ba
 import haiku as hk
 import jax
 import jax.numpy as jnp
+
+from jax_toolkit.losses.utils import get_haiku_loss_function
+
 
 def net_function(x: jnp.ndarray) -> jnp.ndarray:
     net = hk.Sequential([
