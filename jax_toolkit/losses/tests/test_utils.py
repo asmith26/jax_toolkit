@@ -21,7 +21,6 @@ class TestGetHaikuLossFunction(unittest.TestCase):
             return predictions
 
         net_transform = hk.transform(net_function)
-        net_transform = hk.without_apply_rng(net_transform)  # as deterministic outcome
         actual_loss_function_wrapper = get_haiku_loss_function(net_transform, loss="mean_squared_error")
 
         # Check works

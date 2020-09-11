@@ -48,8 +48,11 @@ def get_haiku_loss_function(
         loss_function = SUPPORTED_LOSSES[loss]
 
         @jax.jit
-        def loss_function_wrapper(params: hk.Params, x: jnp.ndarray, y_true: jnp.ndarray) -> jnp.ndarray:
-            y_pred: jnp.ndarray = net_transform.apply(params, x)
+        def loss_function_wrapper(
+            params: hk.Params, x: jnp.ndarray, y_true: jnp.ndarray, rng: jnp.ndarray = None
+        ) -> jnp.ndarray:
+            # rng argument can be used is net_transform.apply() is non-deterministic, and you require and "random seed"
+            y_pred: jnp.ndarray = net_transform.apply(params, rng, x)
             loss_value: jnp.ndarray = loss_function(y_true, y_pred)
             return loss_value
 
