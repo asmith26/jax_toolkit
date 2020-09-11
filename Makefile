@@ -47,11 +47,11 @@ pip-compile:                                 ## Compile requirements.txt from se
 
 pip-install:                                 ## Install dependencies into current environment
 	pip install -r requirements-dev.txt
+	pip install -e .\[losses_utils\]
 
 pip-sync:                                    ## Update your conda/virtual environment to reflect exactly (this will install/upgrade/uninstall everything necessary) what's in requirements.txt
 	pip-sync
 
 pip-sync-dev: pip-sync pip-install           ## Update your conda/virtual environment to reflect exactly what's in requirements.txt, and then install the dev requirements.
-	pip install .\[losses_utils\]
 
 test-all: clean lint coverage-with-report    ## Run all checks
