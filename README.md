@@ -12,7 +12,7 @@ This library currently contains the basics for a number of losses and metrics. W
 pip install jax_toolkit
 ```
 
-Or for additional loss fucntion [utils](https://asmith26.github.io/jax_toolkit/losses_and_metrics/#utils):
+Or for additional loss function [utils](https://asmith26.github.io/jax_toolkit/losses_and_metrics/#utils):
 
 ```bash
 pip install jax_toolkit[losses_utils]
