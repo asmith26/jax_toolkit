@@ -114,7 +114,7 @@ def net_function(x: jnp.ndarray) -> jnp.ndarray:
     return predictions
 net_transform = hk.transform(net_function)
 
-loss_function = get_haiku_loss_function(net_transform, loss="mean_squared_error")
+loss_function = get_haiku_loss_function(net_transform, loss="sigmoid_focal_crossentropy", alpha=None, gamma=2.0)
 
 # Train model,
 ...
