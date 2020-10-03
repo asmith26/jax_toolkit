@@ -28,9 +28,9 @@ class TestGetHaikuLossFunction(unittest.TestCase):
         rng = jax.random.PRNGKey(42)
         params = net_transform.init(rng, jnp.array(0))
 
-        self.assertEqual(0, actual_loss_function_wrapper(params, x=jnp.array(0), y_true=jnp.array(0)))
-        self.assertEqual(0, actual_loss_function_wrapper(params, x=jnp.array(1), y_true=jnp.array(1)))
-        self.assertEqual(1, actual_loss_function_wrapper(params, x=jnp.array(0), y_true=jnp.array(1)))
+        self.assertEqual(0, actual_loss_function_wrapper(params, jnp.array(0), jnp.array(0)))
+        self.assertEqual(0, actual_loss_function_wrapper(params, jnp.array(1), jnp.array(1)))
+        self.assertEqual(1, actual_loss_function_wrapper(params, jnp.array(0), jnp.array(1)))
 
     def test_supported_loss_returns_correctly_with_loss_kwargs(self):
         import haiku as hk
