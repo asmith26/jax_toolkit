@@ -22,7 +22,7 @@ setup(
     packages=find_packages(include=["jax_toolkit", "jax_toolkit.*"]),
     install_requires=["jax", "jaxlib"],
     extras_require={"losses_utils": ["dm-haiku"]},
-    python_requires=">=3.7",
+    python_requires=">=3.6",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Science/Research",
