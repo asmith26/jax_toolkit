@@ -53,10 +53,9 @@ def get_haiku_loss_function(
             x: jnp.ndarray,
             y_true: jnp.ndarray,
             rng: jnp.ndarray = None,
-            **predict_kwargs: Dict[str, Any],
         ) -> jnp.ndarray:
             # rng argument can be used if net_transform.apply() is non-deterministic, and you require a "random seed"
-            y_pred: jnp.ndarray = net_transform.apply(params, rng, x, **predict_kwargs)
+            y_pred: jnp.ndarray = net_transform.apply(params, rng, x)
             loss_value: jnp.ndarray = loss_function(y_true, y_pred, **loss_kwargs)  # type: ignore
             return loss_value
 
