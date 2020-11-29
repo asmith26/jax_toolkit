@@ -672,7 +672,7 @@
 <span class="kn">from</span> <span class="nn">jax_toolkit.losses.utils</span> <span class="kn">import</span> <span class="n">get_haiku_loss_function</span>
 
 
-<span class="k">def</span> <span class="nf">net_function</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">is_training</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">net_function</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="n">net</span> <span class="o">=</span> <span class="n">hk</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
         <span class="o">...</span>
     <span class="p">])</span>
@@ -684,7 +684,7 @@
 
 <span class="c1"># Train model,</span>
 <span class="o">...</span>
-<span class="n">grads</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss_function</span><span class="p">)(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">is_training</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">grads</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss_function</span><span class="p">)(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="o">...</span>
 </code></pre></div>
 <h2 id="useful-resources">Useful resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h2>
