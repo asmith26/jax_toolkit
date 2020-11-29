@@ -106,7 +106,7 @@ import jax.numpy as jnp
 from jax_toolkit.losses.utils import get_haiku_loss_function
 
 
-def net_function(x: jnp.ndarray) -> jnp.ndarray:
+def net_function(x: jnp.ndarray, is_training: bool) -> jnp.ndarray:
     net = hk.Sequential([
         ...
     ])
@@ -118,7 +118,7 @@ loss_function = get_haiku_loss_function(net_transform, loss="sigmoid_focal_cross
 
 # Train model,
 ...
-grads = jax.grad(loss_function)(params, x, y)
+grads = jax.grad(loss_function)(params, x, y, is_training=True)
 ...
 ``` 
 
