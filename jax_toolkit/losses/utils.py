@@ -1,5 +1,4 @@
-from functools import partial
-from typing import Callable, Dict, Optional
+from typing import Any, Callable, Dict
 
 import jax
 import jax.numpy as jnp
@@ -43,17 +42,21 @@ SUPPORTED_LOSSES: Dict[str, Callable[[jnp.ndarray, jnp.ndarray], jnp.ndarray]] =
 
 
 def get_haiku_loss_function(
-    net_transform: hk.Transformed, loss: str, **loss_kwargs: Dict[str, float]
+    net_transform: hk.Transformed, loss: str, **loss_kwargs: Dict[str, Any]
 ) -> Callable[[hk.Params, jnp.ndarray, jnp.ndarray, jnp.ndarray, bool], jnp.ndarray]:
     try:
         loss_function = SUPPORTED_LOSSES[loss]
 
         @jax.jit
         def loss_function_wrapper(
-            params: hk.Params, x: jnp.ndarray, y_true: jnp.ndarray, rng: jnp.ndarray = None
+            params: hk.Params,
+            x: jnp.ndarray,
+            y_true: jnp.ndarray,
+            rng: jnp.ndarray = None,
+            **predict_kwargs: Dict[str, Any],
         ) -> jnp.ndarray:
             # rng argument can be used if net_transform.apply() is non-deterministic, and you require a "random seed"
-            y_pred: jnp.ndarray = net_transform.apply(params, rng, x)
+            y_pred: jnp.ndarray = net_transform.apply(params, rng, x, **predict_kwargs)
             loss_value: jnp.ndarray = loss_function(y_true, y_pred, **loss_kwargs)  # type: ignore
             return loss_value
 
