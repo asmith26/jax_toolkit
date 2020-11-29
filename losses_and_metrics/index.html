@@ -8,8 +8,9 @@
       
       
       
+      
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.1">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
       
@@ -17,10 +18,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.3f72e892.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
         
       
     
@@ -65,7 +66,9 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+      
+
+<header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
     <a href=".." title="jax_toolkit" class="md-header-nav__button md-logo" aria-label="jax_toolkit">
       
@@ -99,7 +102,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
       <label class="md-search__icon md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
@@ -150,7 +153,9 @@
               <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="jax_toolkit" class="md-nav__button md-logo" aria-label="jax_toolkit">
       
@@ -195,7 +200,7 @@
         <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="Losses and Metrics" class="md-nav__link md-nav__link--active">
+    <a href="./" class="md-nav__link md-nav__link--active">
       Losses and Metrics
     </a>
     
@@ -480,7 +485,6 @@
 <p>Loss functions are normally minimised (e.g. for learning/optimising a model), and metrics are normally maximised (e.g for further evaluating the performance of a model). Most loss and metric functions have been designed to work in a similar way to <a href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.metrics">scikit-learn metrics</a> if available, otherwise <a href="https://www.tensorflow.org/api_docs/python/tf">tensorflow</a>/<a href="https://www.tensorflow.org/addons/api_docs/python/tfa/">tensorflow addons</a> (e.g. same names, similar implementations), and have the form:</p>
 <div class="highlight"><pre><span></span><code><span class="n">function_name</span><span class="p">(</span><span class="n">y_true</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
 </code></pre></div>
-
 <h2 id="bounding-box">Bounding Box<a class="headerlink" href="#bounding-box" title="Permanent link">&para;</a></h2>
 <h3 id="losses">Losses<a class="headerlink" href="#losses" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jax_toolkit.losses.bounding_box</span> <span class="kn">import</span> <span class="n">giou_loss</span>
@@ -488,7 +492,6 @@
 <span class="n">giou_loss</span><span class="p">(</span><span class="n">boxes1</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">boxes2</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
 <span class="c1"># boxes are encoded as [y_min, x_min, y_max, x_max], e.g. jnp.array([[4.0, 3.0, 7.0, 5.0], [5.0, 6.0, 10.0, 7.0]])</span>
 </code></pre></div>
-
 <table>
 <thead>
 <tr>
@@ -507,7 +510,6 @@
 <h4 id="losses_1">Losses<a class="headerlink" href="#losses_1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jax_toolkit.losses.classification</span> <span class="kn">import</span> <span class="n">LOSS_FUNCTION</span>
 </code></pre></div>
-
 <table>
 <thead>
 <tr>
@@ -570,7 +572,6 @@
 <h4 id="metrics">Metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jax_toolkit.metrics.classification</span> <span class="kn">import</span> <span class="n">LOSS_FUNCTION</span>
 </code></pre></div>
-
 <table>
 <thead>
 <tr>
@@ -596,7 +597,6 @@
 <h2 id="probabilistic">Probabilistic<a class="headerlink" href="#probabilistic" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jax_toolkit.losses.probabilistic</span> <span class="kn">import</span> <span class="n">kullback_leibler_divergence</span>
 </code></pre></div>
-
 <h4 id="losses_2">Losses<a class="headerlink" href="#losses_2" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
@@ -616,7 +616,6 @@
 <h4 id="losses_3">Losses<a class="headerlink" href="#losses_3" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jax_toolkit.losses.regression</span> <span class="kn">import</span> <span class="n">LOSS_FUNCTION</span>
 </code></pre></div>
-
 <table>
 <thead>
 <tr>
@@ -650,7 +649,6 @@
 <h4 id="metrics_1">Metrics<a class="headerlink" href="#metrics_1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">jax_toolkit.metrics.regression</span> <span class="kn">import</span> <span class="n">LOSS_FUNCTION</span>
 </code></pre></div>
-
 <table>
 <thead>
 <tr>
@@ -674,7 +672,7 @@
 <span class="kn">from</span> <span class="nn">jax_toolkit.losses.utils</span> <span class="kn">import</span> <span class="n">get_haiku_loss_function</span>
 
 
-<span class="k">def</span> <span class="nf">net_function</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">net_function</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">is_training</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="n">net</span> <span class="o">=</span> <span class="n">hk</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
         <span class="o">...</span>
     <span class="p">])</span>
@@ -686,10 +684,9 @@
 
 <span class="c1"># Train model,</span>
 <span class="o">...</span>
-<span class="n">grads</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss_function</span><span class="p">)(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">grads</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss_function</span><span class="p">)(</span><span class="n">params</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">is_training</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="o">...</span>
 </code></pre></div>
-
 <h2 id="useful-resources">Useful resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h2>
 <p>[1] <a href="https://neptune.ai/blog/evaluation-metrics-binary-classification">24 Evaluation Metrics for Binary Classification (And When to Use Them)</a></p>
                 
@@ -723,8 +720,8 @@
       
     </div>
     
-      <script src="../assets/javascripts/vendor.77e55a48.min.js"></script>
-      <script src="../assets/javascripts/bundle.aa3f9871.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
