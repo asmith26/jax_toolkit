@@ -29,6 +29,8 @@ giou_loss(boxes1: jnp.ndarray, boxes2: jnp.ndarray) -> jnp.ndarray
 from jax_toolkit.losses.classification import LOSS_FUNCTION
 ```
 
+Note: Each for these losses take an optional `normalize: bool` argument, which when set to `False` returns individual sample losses.
+
 | Name | Notes |
 |---|---|
 | [log_loss](https://github.com/asmith26/jax_toolkit/blob/master/jax_toolkit/losses/classification.py#L30) (aka. binary/multi-class log loss or binary/categorical crossentropy) | This applies a large penalty for confident, wrong predictions (see plots below). |
