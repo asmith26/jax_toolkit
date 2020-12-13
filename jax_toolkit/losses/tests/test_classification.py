@@ -21,7 +21,7 @@ class TestLogLoss(unittest.TestCase):
         self.assertEqual(1.8817972, actual_loss)
 
     def test_raises_when_number_of_samples_not_equal(self):
-        with self.assertRaises(TypeError) as _:
+        with self.assertRaises(ValueError) as _:
             log_loss(jnp.array([0, 1]), jnp.array([0, 1, 0]))
 
     def test_multiclass_returns_correctly(self):
@@ -35,7 +35,7 @@ class TestLogLoss(unittest.TestCase):
         self.assertEqual(0.69049114, actual_loss)
 
     def test_raises_when_number_of_samples_not_equal_multiclass(self):
-        with self.assertRaises(TypeError) as _:
+        with self.assertRaises(ValueError) as _:
             log_loss(jnp.array([[0, 1], [1, 0]]), jnp.array([[0.2, 0.7], [0.6, 0.5], [0.4, 0.1]]))
 
     def test_raises_when_number_of_multiclass_classes_not_equal(self):
@@ -43,7 +43,7 @@ class TestLogLoss(unittest.TestCase):
             log_loss(jnp.array([[0, 0, 1], [0, 0, 1], [0, 0, 1]]), jnp.array([[0.2, 0.7], [0.6, 0.5], [0.4, 0.1]]))
 
     def test_raises_when_attempt_to_use_not_one_hot_encoded_multiclass(self):
-        with self.assertRaises(ValueError) as _:
+        with self.assertRaises(TypeError) as _:
             log_loss(jnp.array([1, 0, 2]), jnp.array([[0.2, 0.7, 0.1], [0.6, 0.2, 0.2], [0.6, 0.1, 0.3]]))
 
 
@@ -107,7 +107,7 @@ class TestSigmoidFocalCrossentropy(unittest.TestCase):
         self.assertEqual(0.007911247, actual_loss)
 
     def test_raises_when_number_of_samples_not_equal(self):
-        with self.assertRaises(TypeError) as _:
+        with self.assertRaises(ValueError) as _:
             sigmoid_focal_crossentropy(jnp.array([0, 1]), jnp.array([0, 1, 1]))
 
     def test_multiclass_returns_correctly(self):
@@ -123,7 +123,7 @@ class TestSigmoidFocalCrossentropy(unittest.TestCase):
         self.assertEqual(0.007911247, actual_loss)
 
     def test_raises_when_number_of_samples_not_equal_multiclass(self):
-        with self.assertRaises(TypeError) as _:
+        with self.assertRaises(ValueError) as _:
             sigmoid_focal_crossentropy(jnp.array([[0, 1], [1, 0]]), jnp.array([[-0.2, 0.7], [0.6, -0.5], [0.4, 0.1]]))
 
     def test_raises_when_number_of_multiclass_classes_not_equal(self):
