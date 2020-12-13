@@ -24,12 +24,16 @@ def _samplewise_log_loss(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarra
     return loss
 
 
-@jax.jit
-def log_loss(y_true: jnp.ndarray, y_pred: jnp.ndarray, normalize: bool = True) -> jnp.ndarray:
+@partial(jax.jit, static_argnums=(2,))
+def _log_loss(y_true: jnp.ndarray, y_pred: jnp.ndarray, normalize: bool) -> jnp.ndarray:
     losses = _samplewise_log_loss(y_true, y_pred)
     if normalize:
         return jnp.average(losses)  # mean loss over all samples
     return losses  # loss per sample
+
+
+def log_loss(y_true: jnp.ndarray, y_pred: jnp.ndarray, normalize: bool = True) -> jnp.ndarray:
+    return _log_loss(y_true, y_pred, normalize)
 
 
 @jax.jit
@@ -41,10 +45,12 @@ def squared_hinge(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
 
 @partial(jax.jit, static_argnums=(3, 4))
 @partial(jax.vmap, in_axes=(0, 0, 0, None, None))
-def _sigmoid_focal_crossentropy(ce: jnp.ndarray, y_true: jnp.ndarray, y_pred: jnp.ndarray, alpha: float, gamma: float) -> jnp.ndarray:
+def _sigmoid_focal_crossentropy(
+    ce: jnp.ndarray, y_true: jnp.ndarray, y_pred: jnp.ndarray, alpha: float, gamma: float
+) -> jnp.ndarray:
     """ Based on: https://github.com/tensorflow/addons/blob/v0.10.0/tensorflow_addons/losses/focal_loss.py#L90 """
-    if ce.ndim == 1:
-        ce = ce[:, jnp.newaxis]
+    # if ce.ndim == 1:
+    #     ce = ce[:, jnp.newaxis]
 
     p_t = (y_true * y_pred) + ((1 - y_true) * (1 - y_pred))
     alpha_factor = jnp.array([1.0])
