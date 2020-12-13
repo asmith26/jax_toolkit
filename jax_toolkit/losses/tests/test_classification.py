@@ -75,9 +75,11 @@ class TestSquaredHinge(unittest.TestCase):
         # /fd237278e895b42abe8d8d09105cbb82dc2cbba7/sklearn/metrics/tests/test_classification.py#L2037
         actual_loss = squared_hinge(jnp.array([-1, 1, 1, -1]), jnp.array([-8.5, 0.5, 1.5, -0.3]))
         self.assertEqual(0.185, actual_loss)
+        actual_loss = squared_hinge(jnp.array([-1, 1, 1, -1]), jnp.array([-8.5, 0.5, 1.5, -0.3]), normalize=False)
+        np.testing.assert_array_equal(jnp.array([0.0, 0.25, 0.0, 0.48999998]), actual_loss)
 
     def test_raises_when_number_of_samples_not_equal(self):
-        with self.assertRaises(TypeError) as _:
+        with self.assertRaises(ValueError) as _:
             squared_hinge(jnp.array([-1, 1]), jnp.array([-1, 1, 1]))
 
     def test_multiclass_returns_correctly(self):
@@ -89,9 +91,17 @@ class TestSquaredHinge(unittest.TestCase):
             jnp.array([[-1, 1, -1, 1], [-1, -1, 1, 1]]), jnp.array([[-0.3, 0.2, -0.1, 1.6], [-0.25, -1.0, 0.5, 0.6]])
         )
         self.assertEqual(0.36406252, actual_loss)
+        actual_loss = squared_hinge(
+            jnp.array([[-1, 1, -1, 1], [-1, -1, 1, 1]]),
+            jnp.array([[-0.3, 0.2, -0.1, 1.6], [-0.25, -1.0, 0.5, 0.6]]),
+            normalize=False,
+        )
+        np.testing.assert_array_equal(
+            jnp.array([[0.48999998, 0.64000005, 0.80999994, 0.0], [0.5625, 0.0, 0.25, 0.15999998]]), actual_loss
+        )
 
     def test_raises_when_number_of_samples_not_equal_multiclass(self):
-        with self.assertRaises(TypeError) as _:
+        with self.assertRaises(ValueError) as _:
             squared_hinge(jnp.array([[-1, 1], [1, -1]]), jnp.array([[-0.2, 0.7], [0.6, -0.5], [0.4, 0.1]]))
 
     def test_raises_when_number_of_multiclass_classes_not_equal(self):

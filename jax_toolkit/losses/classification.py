@@ -37,10 +37,18 @@ def log_loss(y_true: jnp.ndarray, y_pred: jnp.ndarray, normalize: bool = True) -
 
 
 @jax.jit
-def squared_hinge(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
+@partial(jax.vmap, in_axes=(0, 0))
+def _squared_hinge(y_true: jnp.ndarray, y_pred: jnp.ndarray) -> jnp.ndarray:
     """Based on: https://github.com/tensorflow/tensorflow/blob/af7fd02ca40f362c4ac96dd064d6a2224b65d784/tensorflow
     /python/keras/losses.py#L1324"""
-    return jnp.average(jnp.clip(1 - y_true * y_pred, 0, None) ** 2)
+    return jnp.clip(1 - y_true * y_pred, 0, None) ** 2
+
+
+def squared_hinge(y_true: jnp.ndarray, y_pred: jnp.ndarray, normalize: bool = True) -> jnp.ndarray:
+    losses = _squared_hinge(y_true, y_pred)
+    if normalize:
+        return jnp.average(losses)
+    return losses
 
 
 @partial(jax.jit, static_argnums=(3, 4))
