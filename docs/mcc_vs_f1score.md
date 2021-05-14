@@ -14,7 +14,7 @@ yields:
 
 <img src="https://latex.codecogs.com/svg.latex?\mbox{MCC}=\frac{\mbox{TP}\times\mbox{TN}-\mbox{FP}\times\mbox{FN}}{\sqrt{(\mbox{TP}+\mbox{FP})(\mbox{TP}+\mbox{FN})(\mbox{TN}+\mbox{FP})(\mbox{TN}+\mbox{FN})}} = \frac{96\times0-5\times0}{\sqrt{100\times95\times5\times0}} = \mbox{undefined}" />
 
-- F1 score is sensitive to which class is positive/negative. MCC isn't:
+##  F1 score is sensitive to which class is positive/negative, MCC isn't
 
 F1 score = 0.952, MCC = 0.135
 
