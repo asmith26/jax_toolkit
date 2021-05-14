@@ -1,7 +1,9 @@
 site_name: jax_toolkit
 repo_url: https://github.com/asmith26/jax_toolkit
 nav:
-    - Losses and Metrics: losses_and_metrics.md
+    - Losses and Metrics:
+      - API: losses_and_metrics.md
+      - What are some nice features of Matthews correlation coefficient vs F1 score?: mcc_vs_f1score.md
 theme:
 #    name: readthedocs
     name: material
