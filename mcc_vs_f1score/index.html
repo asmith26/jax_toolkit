@@ -9,19 +9,19 @@
       
       
       
-      <link rel="shortcut icon" href="/assets/images/favicon.png">
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
     
     
       
-        <title>jax_toolkit</title>
+        <title>What are some nice features of Matthews correlation coefficient vs F1 score? - jax_toolkit</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.6910b76c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.196e0c26.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
         
       
     
@@ -56,6 +56,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#what-are-some-nice-features-of-matthews-correlation-coefficient-vs-f1-score" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -65,7 +70,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="/." title="jax_toolkit" class="md-header-nav__button md-logo" aria-label="jax_toolkit">
+    <a href=".." title="jax_toolkit" class="md-header-nav__button md-logo" aria-label="jax_toolkit">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -82,7 +87,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              
+              What are some nice features of Matthews correlation coefficient vs F1 score?
             
           </span>
         </div>
@@ -152,7 +157,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="jax_toolkit" class="md-nav__button md-logo" aria-label="jax_toolkit">
+    <a href=".." title="jax_toolkit" class="md-nav__button md-logo" aria-label="jax_toolkit">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -180,10 +185,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" >
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" checked>
     <label class="md-nav__link" for="nav-1">
       Losses and Metrics
       <span class="md-nav__icon md-icon"></span>
@@ -202,7 +209,7 @@
 
 
   <li class="md-nav__item">
-    <a href="/losses_and_metrics/" class="md-nav__link">
+    <a href="../losses_and_metrics/" class="md-nav__link">
       API
     </a>
   </li>
@@ -212,11 +219,49 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="/mcc_vs_f1score/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        What are some nice features of Matthews correlation coefficient vs F1 score?
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       What are some nice features of Matthews correlation coefficient vs F1 score?
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mcc-can-raise-a-red-flag-when-many-parts-of-the-confusion-matrix-are-0" class="md-nav__link">
+    MCC can raise a "red flag" when many parts of the confusion matrix are 0
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -232,12 +277,124 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mcc-can-raise-a-red-flag-when-many-parts-of-the-confusion-matrix-are-0" class="md-nav__link">
+    MCC can raise a "red flag" when many parts of the confusion matrix are 0
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
-  <h1>404 - Not found</h1>
-
+                
+                  <a href="https://github.com/asmith26/jax_toolkit/edit/master/docs/mcc_vs_f1score.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="what-are-some-nice-features-of-matthews-correlation-coefficient-vs-f1-score">What are some nice features of Matthews correlation coefficient vs F1 score?<a class="headerlink" href="#what-are-some-nice-features-of-matthews-correlation-coefficient-vs-f1-score" title="Permanent link">&para;</a></h1>
+<h2 id="mcc-can-raise-a-red-flag-when-many-parts-of-the-confusion-matrix-are-0">MCC can raise a "red flag" when many parts of the confusion matrix are 0<a class="headerlink" href="#mcc-can-raise-a-red-flag-when-many-parts-of-the-confusion-matrix-are-0" title="Permanent link">&para;</a></h2>
+<p>For example:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Predicted: 0</th>
+<th>Predicted: 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>True: 0</td>
+<td>TN = 0</td>
+<td>FP = 5</td>
+</tr>
+<tr>
+<td>True: 1</td>
+<td>FN = 0</td>
+<td>TP = 95</td>
+</tr>
+</tbody>
+</table>
+<p>yields:</p>
+<p><img src="https://latex.codecogs.com/svg.latex?\mbox{F1 score}=\frac{2 \times \mbox{TP}}{2\times\mbox{TP}+\mbox{FP}+\mbox{FN}} = \frac{2\times95}{2\times95 + 5} = 0.974" /></p>
+<p><img src="https://latex.codecogs.com/svg.latex?\mbox{MCC}=\frac{\mbox{TP}\times\mbox{TN}-\mbox{FP}\times\mbox{FN}}{\sqrt{(\mbox{TP}+\mbox{FP})(\mbox{TP}+\mbox{FN})(\mbox{TN}+\mbox{FP})(\mbox{TN}+\mbox{FN})}} = \frac{96\times0-5\times0}{\sqrt{100\times95\times5\times0}} = \mbox{undefined}" /></p>
+<ul>
+<li>F1 score is sensitive to which class is positive/negative. MCC isn't:</li>
+</ul>
+<p>F1 score = 0.952, MCC = 0.135</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Predicted: 0</th>
+<th>Predicted: 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>True: 0</td>
+<td>TN = 1</td>
+<td>FP = 4</td>
+</tr>
+<tr>
+<td>True: 1</td>
+<td>FN = 5</td>
+<td>TP = 90</td>
+</tr>
+</tbody>
+</table>
+<p>F1 score = 0.182, MCC = 0.135</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Predicted: 0</th>
+<th>Predicted: 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>True: 0</td>
+<td>TN = 90</td>
+<td>FP = 5</td>
+</tr>
+<tr>
+<td>True: 1</td>
+<td>FN = 4</td>
+<td>TP = 1</td>
+</tr>
+</tbody>
+</table>
+<h1 id="useful-resources">Useful resources<a class="headerlink" href="#useful-resources" title="Permanent link">&para;</a></h1>
+<p>[1] <a href="https://www.youtube.com/watch?v=wpQiEHYkBys">Machine Learning Model Evaluation Metrics</a></p>
+                
+              
               
                 
 
@@ -250,6 +407,27 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../losses_and_metrics/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                API
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -267,15 +445,15 @@
       
     </div>
     
-      <script src="/assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="/assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
-          base: "/",
+          base: "..",
           features: [],
           search: Object.assign({
-            worker: "/assets/javascripts/worker/search.4ac00218.min.js"
+            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
