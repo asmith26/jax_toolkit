@@ -4,7 +4,7 @@
 #
 #    pip-compile
 #
-absl-py==0.12.0           # via jax, jaxlib
+absl-py==0.15.0           # via jax, jaxlib
 jax==0.2.8                # via jax_toolkit (setup.py)
 jaxlib==0.1.61            # via jax_toolkit (setup.py)
 numpy==1.21.0             # via jax, jaxlib, opt-einsum, scipy
