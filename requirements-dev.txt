@@ -2,7 +2,7 @@
 
 # Docs
 mkdocs==1.2.1
-mkdocs-material==7.1.10
+mkdocs-material==8.0.1
 pymdown-extensions==8.2
 
 # Packaging
