@@ -20,4 +20,4 @@ bandit==1.7.0
 
 # Test
 coverage==5.5
-nose2==0.10.0
+nose2==0.12.0
