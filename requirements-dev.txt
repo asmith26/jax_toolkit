@@ -3,7 +3,7 @@
 # Docs
 mkdocs==1.2.1
 mkdocs-material==7.1.10
-pymdown-extensions==8.2
+pymdown-extensions==9.9.2
 
 # Packaging
 bump2version==1.0.1
